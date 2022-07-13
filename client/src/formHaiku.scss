@@ -1,0 +1,17 @@
+.textFormNewHaiku {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    width: 80%;
+    margin-top: 40%
+}
+
+.newHaikuLine {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+}
+
+

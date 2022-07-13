@@ -5,6 +5,7 @@ import Nav from "./components/Nav";
 import Home from "./components/Home";
 import SignUp from './components/SignUp'
 import Footer from "./components/Footer";
+import FormNewHaiku from "./components/FormNewHaiku";
 
 export default function App() {
   return (
@@ -14,6 +15,7 @@ export default function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/inscription" element={<SignUp />} />
+          <Route path="/newhaiku" element={<FormNewHaiku />} />
         </Routes>
       </div>
       <Footer />
