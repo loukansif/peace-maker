@@ -2,6 +2,8 @@ import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
+import routerUser from "./routes/user.js";
+import routerHaiku from "./routes/haiku.js";
 
 dotenv.config({ path: "./config.env" });
 
@@ -12,7 +14,8 @@ const URI = process.env.ATLAS_URI;
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
+app.use("/users", routerUser)
+app.use("/haikus", routerHaiku)
 
 
 main().catch((err) => console.error(err));
