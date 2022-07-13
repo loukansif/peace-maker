@@ -26,7 +26,7 @@ export default function ButtonAppBar() {
 localStorage.setItem("userImg",'/logo192.png')
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar sx={{position:"fixed", bgcolor:"rgba(255,255,255,0.1)", color :"whitesmoke"}}>
+      <AppBar sx={{position:"fixed", bgcolor:"rgba(255,255,255,0)", color :"whitesmoke"}} elevation={0}>
         <Toolbar>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1}}>
             <a href="/">
