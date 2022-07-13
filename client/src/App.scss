@@ -1,7 +1,14 @@
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,500,300,700);
 
+
 * {
   font-family: Open Sans;
+}
+
+body {
+  background-image: url(./assets/img/fondHaiku.png);
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .title {
@@ -50,6 +57,9 @@ span {
   }
 }
 
+.logoHaiku{
+  width: 80px;;
+}
 .logoImg {
   width: 110px;
 }
