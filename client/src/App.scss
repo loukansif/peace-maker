@@ -5,6 +5,10 @@
   font-family: Open Sans;
 }
 
+.main {
+  margin: auto 10px;
+}
+
 body {
   background-image: url(./assets/img/fondHaiku.png);
   background-repeat: no-repeat;
@@ -15,6 +19,14 @@ body {
   text-align: center;
   margin-top: 90px;
 }
+
+@media (max-width: 880px) {
+  .title {
+    text-align: center;
+    margin-top: 70px;
+  }
+ }
+
 span {
   color: rgb(50, 97, 226);
   font-style: italic;
@@ -95,16 +107,6 @@ table {
 
 ////////////// footer //////////////
 
-// section {
-//   width: 100%;
-//   display: inline-block;
-//   background: #333;
-//   height: 50vh;
-//   text-align: center;
-//   font-size: 22px;
-//   font-weight: 700;
-//   text-decoration: underline;
-// }
 
 .footer-distributed {
   background: #333333;
@@ -267,20 +269,7 @@ table {
 }
 
 @media (max-width: 880px) {
-  .footer-distributed {
-    font: bold 14px sans-serif;
-  }
-
-  .footer-distributed .footer-left,
-  .footer-distributed .footer-center,
-  .footer-distributed .footer-right {
-    display: block;
-    width: 100%;
-    margin-bottom: 40px;
-    text-align: center;
-  }
-
-  .footer-distributed .footer-center i {
-    margin-left: 0;
-  }
+ .footer-distributed {
+  visibility: hidden;
+ }
 }

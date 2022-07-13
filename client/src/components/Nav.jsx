@@ -12,18 +12,18 @@ import img from "../assets/img/logo_haiku.png";
 export default function ButtonAppBar() {
 
   // declaration des infos de deconnexion
-  const deconnect = () => {
-    localStorage.setItem("userLastName", "")
-    localStorage.setItem("userFirtsName", "")
-    localStorage.setItem("userEmail", "")
-    localStorage.setItem("userImg", "")
-    localStorage.setItem("userIsLogged", "")
-    localStorage.setItem("userAdmin", "")
-    window.location.reload()
-  }
+  // const deconnect = () => {
+  //   localStorage.setItem("userLastName", "")
+  //   localStorage.setItem("userFirtsName", "")
+  //   localStorage.setItem("userEmail", "")
+  //   localStorage.setItem("userImg", "")
+  //   localStorage.setItem("userIsLogged", "")
+  //   localStorage.setItem("userAdmin", "")
+  //   window.location.reload()
+  // }
 
   // test pour faire apparaitre le profil
-localStorage.setItem("userImg",'/logo192.png')
+// localStorage.setItem("userImg",'/logo192.png')
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar sx={{position:"fixed", bgcolor:"rgba(255,255,255,0.1)", color :"whitesmoke"}}>
@@ -33,7 +33,7 @@ localStorage.setItem("userImg",'/logo192.png')
               <img src={img} className="logoHaiku"></img>
             </a>
           </Typography>
-          {localStorage.getItem('userIsLogged') ?
+          {false ?
             <>
               
               <Button color="inherit" href="/profil">
