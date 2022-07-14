@@ -4,10 +4,8 @@ import Typography from "@mui/material/Typography";
 import Link from "@mui/material/Link";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
-import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
-import FormHelperText from "@mui/material/FormHelperText";
 import Select from "@mui/material/Select";
 import Button from "@mui/material/Button";
 import AppBar from "@mui/material/AppBar";
@@ -26,50 +24,60 @@ export default function FormNewHaiku() {
     <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
   );
 
+  
+  ///////////////////// HANDLE CHANGE TODO: NOT WORKING => target.value.length OK , target.value NOT OK /////////////////////////////////////
   const [haikuLine1, setHaikuLine1] = useState("");
   const [haikuLine2, setHaikuLine2] = useState("");
   const [haikuLine3, setHaikuLine3] = useState("");
 
-  ///////////////////// HANDLE CHANGE TODO: NOT WORKING => target.value.length OK , target.value NOT OK /////////////////////////////////////
-
   const handleChangeLine1 = (e) => {
     sethaiku_Line_1_Length(30 - e.target.value.length);
     setHaikuLine1(e.target.value);
+    setNewHaiku({ text: {fullNewHaiku} })
   };
 
   const handleChangeLine2 = (e) => {
     sethaiku_Line_2_Length(30 - e.target.value.length);
     setHaikuLine2(e.target.value);
+    setNewHaiku({ text: {fullNewHaiku} })
   };
 
   const handleChangeLine3 = (e) => {
     sethaiku_Line_3_Length(30 - e.target.value.length);
     setHaikuLine3(e.target.value);
+    setNewHaiku({ text: {fullNewHaiku} })
   };
 
-  const fullNewHaiku = ` ${haikuLine1} //n ${haikuLine2} //n ${haikuLine3} `;
+    let fullNewHaiku = ` ${haikuLine1} //n ${haikuLine2} //n ${haikuLine3} `;
 
   ///////////////////////////// POST NEW HAIKU TODO: FETCH NOT WORKING => Post Bad Request ///////////////////////////////////////
 
-  const postNewHaiku = (event) => {
-    event.preventDefault();
+  const [newHaiku, setNewHaiku] = useState({
+    userID: "",
+    text: "",
+    emoji: "",
+    createdAt: "",
+  });
 
+  const postNewHaiku = (event) => {
+      //// MISE A JOUR DU FULL HAIKU (HAIKU COMPLET) ////
+    
     fetch("http://localhost:5000/haikus/", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
+       HEADERS: {
+       "CONTENT-TYPE": "APPLICATION/JSON",
         },
-        body: JSON.stringify(fullNewHaiku),
-      })
-        .then(() => {
-            console.log(fullNewHaiku)
-          alert("haiku enregistré");
+            body: JSON.stringify(newHaiku),
         })
-        .catch((error) => {
-         alert(error);
-          return;
-        });
-  }
+        .then(() => {
+            alert("haiku enregistré");
+            console.log(fullNewHaiku);
+      })
+      .catch((error) => {
+        alert(error);
+        return;
+    });
+  };
 
   /////////////////////////////////////////////// set state mood Emoji /////////////////////////////////////////////
   const [moodEmoji, setMoodEmoji] = React.useState("");
@@ -101,12 +109,12 @@ export default function FormNewHaiku() {
     setOpen(true);
   };
 
-  ////////////////////////////////////////// FETCH POST NEW HAIKU ONCLICK ////////////////////////////////////////
-
   //////////////////////////////////////////////////////  JSX RETURN ////////////////////////////////////////
 
   return (
     <>
+      {/* /////////////////////////////////// NAV BAR SECTION NEW HAIKU ///////////////////////////////////////// */}
+
       <Box sx={{ flexGrow: 1 }}>
         <AppBar
           sx={{
@@ -119,7 +127,11 @@ export default function FormNewHaiku() {
           <Toolbar>
             <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
               <a href="/">
-                <img src={backIcone} className="backIcone"></img>
+                <img
+                  src={backIcone}
+                  className="backIcone"
+                  alt="fleche-retour"
+                ></img>
               </a>
             </Typography>
             <Link to="/validationNewHaiku">
@@ -128,7 +140,8 @@ export default function FormNewHaiku() {
                 color="inherit"
                 sx={{ border: "solid 1px whitesmoke", borderRadius: "15px" }}
                 onClick={() => {
-                    postNewHaiku()
+                  postNewHaiku();
+                  
                 }}
               >
                 partager
@@ -190,19 +203,19 @@ export default function FormNewHaiku() {
             <div className="LineCounterFormNewHaiku">
               <div className="haikuLineLengthCount">
                 {" "}
-                {haiku_Line_1_Length == 0 || haiku_Line_1_Length == 30
+                {haiku_Line_1_Length === 0 || haiku_Line_1_Length === 30
                   ? counterspaceDefault
                   : haiku_Line_1_Length}{" "}
               </div>
               <div className="haikuLineLengthCount">
                 {" "}
-                {haiku_Line_2_Length == 0 || haiku_Line_2_Length == 30
+                {haiku_Line_2_Length === 0 || haiku_Line_2_Length === 30
                   ? counterspaceDefault
                   : haiku_Line_2_Length}{" "}
               </div>
               <div className="haikuLineLengthCount">
                 {" "}
-                {haiku_Line_3_Length == 0 || haiku_Line_3_Length == 30
+                {haiku_Line_3_Length === 0 || haiku_Line_3_Length === 30
                   ? counterspaceDefault
                   : haiku_Line_3_Length}{" "}
               </div>
