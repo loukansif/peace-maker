@@ -1,9 +1,16 @@
+.textAndCounterFormNewHaiku {
+    display: flex;
+    flex-direction: row;
+    width: 80%;
+}
+
 .textFormNewHaiku {
     display: flex;
     flex-direction: column;
     align-content: center;
-    width: 80%;
-    margin-top: 40%
+    width: 100%;
+    margin-top: 40%;
+    margin-right: 2%
 }
 
 .newHaikuLine {
@@ -12,6 +19,16 @@
     align-items: center;
     text-align: center;
     justify-content: center;
+    align-content: center;
+    width: 100%;
+    margin: auto;
 }
 
+.LineCounterFormNewHaiku {
+    margin-top: 48%;
+    line-height: 2em;
+}
 
+.titleFormHaiku {
+
+}
