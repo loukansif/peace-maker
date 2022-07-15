@@ -7,9 +7,9 @@ export async function getUsers(){
       return userList
 }
 
-export async function getOneUser(_id){
+export async function getOneUser(email){
   const oneUser = await Users
-    .findOne({_id: _id})
+    .findOne({email: email})
 
     return oneUser
 }
