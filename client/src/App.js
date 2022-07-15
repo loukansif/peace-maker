@@ -7,6 +7,7 @@ import SignUp from './components/SignUp'
 import SignIn from './components/SignIn'
 import Footer from "./components/Footer";
 import FormNewHaiku from "./components/FormNewHaiku";
+import ValidationNewHaiku from "./components/ValidationNewHaiku";
 
 export default function App() {
   return (
@@ -18,6 +19,7 @@ export default function App() {
           <Route path="/inscription" element={<SignUp />} />
           <Route path="/connexion" element={<SignIn />} />
           <Route path="/newhaiku" element={<FormNewHaiku />} />
+          <Route path="/validationNewHaiku" element={<ValidationNewHaiku />} />
         </Routes>
       </div>
       <Footer />
