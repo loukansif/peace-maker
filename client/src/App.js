@@ -16,6 +16,7 @@ export default function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/inscription" element={<SignUp />} />
+          <Route path="/connexion" element={<SignIn />} />
           <Route path="/newhaiku" element={<FormNewHaiku />} />
         </Routes>
       </div>
