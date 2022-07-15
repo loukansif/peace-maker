@@ -36,7 +36,9 @@ span {
   color: rgb(50, 97, 226);
   font-style: italic;
 }
-
+.margTop {
+  margin-top: 100px;
+}
 
 .logoHaiku{
   width: 80px;;
@@ -47,6 +49,12 @@ span {
 
 .totemItems {
   text-align: center;
+}
+
+.totemPosition {
+  position: relative;
+  top: -50px;
+  left:-50px;
 }
 
 .totemItem {
