@@ -13,6 +13,7 @@ body {
   background-image: url(./assets/img/fondHaiku.png);
   background-repeat: no-repeat;
   background-size: cover;
+  min-height: 100vh;
 }
 
 .title {
@@ -47,6 +48,12 @@ span {
 .totemItem {
   width: 70px;
   // opacity: 50%;
+}
+
+.totemSelected{
+  border: 1px solid white;
+  border-radius: 25px;
+  width: 75px;
 }
 
 ////////////// footer //////////////
@@ -214,6 +221,11 @@ span {
 
 @media (max-width: 880px) {
  .footer-distributed {
-  visibility: hidden;
+  display: none;
  }
+ 
+ .totemItem {
+  width: 64px;
+}
+
 }

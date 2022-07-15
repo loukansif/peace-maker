@@ -1,15 +1,12 @@
 import React, { useState } from "react";
-import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-// import abeille from "/assets/totem/abeille.png";
 
 const theme = createTheme();
 
@@ -20,11 +17,8 @@ export default function Inscription() {
     lastname: "",
     email: "",
     password: "",
-    totem: "",
+    totem: "/assets/totem/abeille.png",
   });
-
-  
-  // const [isActive, setIsActive] = useState(true);
 
   function updateForm(value) {
     return setForm((prev) => {
@@ -59,11 +53,6 @@ export default function Inscription() {
       alert("les mots de passe ne sont pas identiques");
     }
   };
-
-
-  // const handleClick = () => {
-  //   setIsActive(current => !current);
-  // };
 
   return (
     <div className="main">
@@ -165,22 +154,17 @@ export default function Inscription() {
                 </Grid>
                 <Grid item xs={12} className="totemItems">
                   <div>
-                   <p>Veuillez choisir votre Totem</p>
-                   {/* <img src="/assets/totem/abeille.png" className="totemItem"/> */}
+                    <p>Veuillez choisir votre Totem</p>
+                    <img src={form.totem} alt="" className="totemSelected" />
                   </div>
                   <div>
                     <img
-                      // style={{
-                      //   opacity: isActive ? '50%' : '100%'
-                      // }}
                       src={"/assets/totem/abeille.png"}
                       alt=""
                       className="totemItem"
-                      onClick={() =>{
+                      onClick={() => {
                         updateForm({ totem: "/assets/totem/abeille.png" });
-                        // handleClick();
-                      }
-                      }
+                      }}
                     />
                     <img
                       src={"/assets/totem/butterfly.png"}
