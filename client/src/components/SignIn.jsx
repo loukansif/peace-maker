@@ -6,12 +6,18 @@ import TextField from "@mui/material/TextField";
 import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
-const theme = createTheme();
+const theme = createTheme({
+  palette: {
+    whiteColor: {
+      main: '#fff',
+      contrastText: '#fff',
+    },
+  },
+});
 
 export default function Connexion() {
   let navigate = useNavigate();
@@ -33,11 +39,13 @@ export default function Connexion() {
         if (jresponse === null) {
           alert("Erreur email ou mot de passe");
         } else if (pass === jresponse.password) {
-          localStorage.setItem("id", jresponse._id);
+          localStorage.setItem("userId", jresponse._id);
           localStorage.setItem("userLastName", jresponse.lastname);
           localStorage.setItem("userFirtsName", jresponse.firstname);
           localStorage.setItem("userEmail", jresponse.email);
           localStorage.setItem("userAdmin", jresponse.admin);
+          localStorage.setItem("userTotem", jresponse.totem);
+          localStorage.setItem("userPass", jresponse.password);
           localStorage.setItem("userIsLogged", true);
           navigate("/", { replace: true });
           window.location.reload();
@@ -56,7 +64,7 @@ export default function Connexion() {
             paddingTop: 8,
             display: "flex",
             flexDirection: "column",
-            alignItems: "center",
+            alignItems: "center"
           }}
         >
           <Typography component="h1" variant="h5">
@@ -78,6 +86,7 @@ export default function Connexion() {
               name="email"
               autoComplete="email"
               autoFocus
+              color="whiteColor"
             />
             <TextField
               variant="standard"
@@ -89,6 +98,7 @@ export default function Connexion() {
               type="password"
               id="password"
               autoComplete="current-password"
+              color="whiteColor"
             />
             {/* <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
@@ -104,12 +114,12 @@ export default function Connexion() {
             </Button>
             <Grid container>
               <Grid item xs>
-                <Link href="#" variant="body2">
+                <Link href="#" variant="body2" sx={{ color: "white" }}>
                   Mot de passe oublié ?
                 </Link>
               </Grid>
               <Grid item>
-                <Link href="/inscription" variant="body2">
+                <Link href="/inscription" variant="body2" sx={{ color: "white" }}>
                   {"Pas de compte ? Inscrivez-vous"}
                 </Link>
               </Grid>
