@@ -1,5 +1,5 @@
 import express from 'express'
-import {getUsers, getOneUser, createUser} from '../controllers/user.js'
+import {getUsers, getOneUser, createUser, updateUser} from '../controllers/user.js'
 const routerUser = express.Router()
 routerUser.use(express.json())
 routerUser.use(express.urlencoded({ extended: true }))
@@ -19,5 +19,10 @@ routerUser.post('/', async (req, res) => {
     res.send('nouveau user créé')
 })
 
+
+routerUser.put('/:email', async (req, res) => {
+    let updateOneUser = await updateUser(req.params.email, req.body)
+    res.send(updateOneUser)
+        });
 
 export default routerUser

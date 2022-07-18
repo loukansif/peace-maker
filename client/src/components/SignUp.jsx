@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
@@ -8,9 +9,17 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
-const theme = createTheme();
+const theme = createTheme({
+  palette: {
+    whiteColor: {
+      main: '#fff',
+      contrastText: '#fff',
+    },
+  },
+});
 
 export default function Inscription() {
+  let navigate = useNavigate();
   const [form, setForm] = useState({
     admin: false,
     firstname: "",
@@ -43,6 +52,8 @@ export default function Inscription() {
       })
         .then(() => {
           alert("vous etes enregistré");
+          navigate("/connexion", { replace: true });
+          window.location.reload();
         })
         .catch((error) => {
           window.alert(error);
@@ -101,6 +112,7 @@ export default function Inscription() {
                     variant="standard"
                     onChange={(e) => updateForm({ firstname: e.target.value })}
                     autoFocus
+                    color="whiteColor"
                   />
                 </Grid>
                 <Grid item xs={12} sm={6}>
@@ -113,6 +125,7 @@ export default function Inscription() {
                     variant="standard"
                     onChange={(e) => updateForm({ lastname: e.target.value })}
                     autoComplete="family-name"
+                    color="whiteColor"
                   />
                 </Grid>
                 <Grid item xs={12}>
@@ -125,6 +138,7 @@ export default function Inscription() {
                     variant="standard"
                     onChange={(e) => updateForm({ email: e.target.value })}
                     autoComplete="email"
+                    color="whiteColor"
                   />
                 </Grid>
                 <Grid item xs={12}>
@@ -138,6 +152,7 @@ export default function Inscription() {
                     variant="standard"
                     onChange={(e) => updateForm({ password: e.target.value })}
                     autoComplete="new-password"
+                    color="whiteColor"
                   />
                 </Grid>
                 <Grid item xs={12}>
@@ -150,6 +165,7 @@ export default function Inscription() {
                     id="passwordControl"
                     autoComplete="new-password"
                     variant="standard"
+                    color="whiteColor"
                   />
                 </Grid>
                 <Grid item xs={12} className="totemItems">
