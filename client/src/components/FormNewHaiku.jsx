@@ -30,7 +30,7 @@ export default function FormNewHaiku() {
   const [haiku_Line_3_Length, sethaiku_Line_3_Length] = useState(0);
 
   const [form, setForm] = useState({
-    userId: localStorage.getItem("id"),
+    userId: localStorage.getItem("email"),
     line1: "",
     line2: "",
     line3: "",
