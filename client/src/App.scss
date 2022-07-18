@@ -1,6 +1,5 @@
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,500,300,700);
 
-
 * {
   font-family: Open Sans;
 }
@@ -11,6 +10,11 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding: 45px 10px 0;
+}
+
+.App {  
+  min-height: calc(100vh - 305px);
 }
 
 body {
@@ -22,26 +26,20 @@ body {
 
 .title {
   text-align: center;
-  margin-top: 90px;
 }
 
 @media (max-width: 880px) {
   .title {
     text-align: center;
-    margin-top: 70px;
+    font-size: 20px;
   }
- }
-
-span {
-  color: rgb(50, 97, 226);
-  font-style: italic;
 }
 .margTop {
   margin-top: 100px;
 }
 
-.logoHaiku{
-  width: 80px;;
+.logoHaiku {
+  width: 80px;
 }
 .logoImg {
   width: 110px;
@@ -59,17 +57,33 @@ span {
 
 .totemItem {
   width: 70px;
-  // opacity: 50%;
 }
 
-.totemSelected{
+.totemSelected {
   border: 1px solid white;
   border-radius: 25px;
   width: 75px;
 }
 
-////////////// footer //////////////
+.navUserImg {
+  width: 40px;
+  max-height: 35px;
+}
 
+.navUserTotem {
+  border: 1px solid white;
+  border-radius: 25px;
+}
+.settingsLogo {
+  margin-right: 10px;
+  width: 25px;
+}
+
+#Root {
+  height: 100%;
+}
+
+////////////// footer //////////////
 
 .footer-distributed {
   background: #333333;
@@ -79,7 +93,7 @@ span {
   text-align: left;
   font: bold 16px sans-serif;
   padding: 55px 50px;
-  margin-top: 100px;
+  height: 305px;
 }
 
 .footer-distributed .footer-left,
@@ -232,12 +246,11 @@ span {
 }
 
 @media (max-width: 880px) {
- .footer-distributed {
-  display: none;
- }
- 
- .totemItem {
-  width: 64px;
-}
+  .footer-distributed {
+    display: none;
+  }
 
+  .totemItem {
+    width: 64px;
+  }
 }

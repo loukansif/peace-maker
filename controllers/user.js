@@ -16,9 +16,12 @@ export async function getOneUser(email){
 
 export async function createUser(userData){
     
-    const User = new Users(userData)
-   
+    const User = new Users(userData)   
     const result = await User.save()
     
     return result
+}
+
+export async function updateUser(email, body) {
+  return await Users.findOneAndUpdate({email: email}, {...body})
 }
