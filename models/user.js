@@ -9,6 +9,6 @@ const userSchema = new mongoose.Schema({
   totem: String
 })
 
-const Users = mongoose.model('Users', userSchema);
+const User = mongoose.model('User', userSchema);
 
-export default Users
+export default User
