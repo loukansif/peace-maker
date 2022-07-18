@@ -1,7 +1,7 @@
 import mongoose from 'mongoose'
 
 const haikuSchema = new mongoose.Schema({
-  userId: String,
+  user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
   text: String,
   emoji: String
 })

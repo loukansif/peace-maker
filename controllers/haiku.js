@@ -5,7 +5,7 @@ import Haikus from '../models/haiku.js'
 export async function getHaikus(){
     const haikuList = await Haikus
       .find()
-    
+      .populate('user')
       return haikuList
 }
 
