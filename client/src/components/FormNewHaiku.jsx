@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import {useNavigate, useParams} from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom";
+import Input from "@mui/material/Input";
 
 import Typography from "@mui/material/Typography";
 import Link from "@mui/material/Link";
@@ -13,13 +14,11 @@ import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import Grid from "@mui/material/Grid";
 
-
 import backIcone from "../assets/icones/backArrow.png";
 
 import "../formHaiku.scss";
 
 export default function FormNewHaiku() {
-
   const navigate = useNavigate();
 
   const [haikuLine1, setHaikuLine1] = useState("");
@@ -61,14 +60,14 @@ export default function FormNewHaiku() {
       },
       body: JSON.stringify(newHaiku),
     })
-    .then(() => {
-      alert("haiku enregistré");
-      console.log(newHaiku);
-    })
-    .catch((error) => {
-      alert(error);
-      return;
-    });
+      .then(() => {
+        alert("haiku enregistré");
+        console.log(newHaiku);
+      })
+      .catch((error) => {
+        alert(error);
+        return;
+      });
   };
 
   const [open, setOpen] = React.useState(false);
@@ -105,16 +104,16 @@ export default function FormNewHaiku() {
                 ></img>
               </a>
             </Typography>
-              <Button 
-                color="inherit"
-                sx={{ border: "solid 1px whitesmoke", borderRadius: "15px" }}
-                onClick={() => {
-                  postNewHaiku();
-                  navigate("/validationNewHaiku")
-                }}
-              >
-                partager
-              </Button>
+            <Button
+              color="inherit"
+              sx={{ border: "solid 1px whitesmoke", borderRadius: "15px" }}
+              onClick={() => {
+                postNewHaiku();
+                navigate("/validationNewHaiku");
+              }}
+            >
+              partager
+            </Button>
           </Toolbar>
         </AppBar>
       </Box>
@@ -143,6 +142,7 @@ export default function FormNewHaiku() {
               </Typography>
               <div className="newHaikuLine">
                 <TextField
+                  inputProps={{ maxLength: 30 }}
                   style={{ width: "100%" }}
                   id="standard-basic"
                   variant="standard"
@@ -157,6 +157,7 @@ export default function FormNewHaiku() {
               </div>
               <div className="newHaikuLine">
                 <TextField
+                  inputProps={{ maxLength: 30 }}
                   style={{ width: "100%" }}
                   id="standard-basic"
                   variant="standard"
@@ -168,6 +169,7 @@ export default function FormNewHaiku() {
               </div>
               <div className="newHaikuLine">
                 <TextField
+                  inputProps={{ maxLength: 30 }}
                   style={{ width: "100%" }}
                   id="standard-basic"
                   variant="standard"
@@ -392,13 +394,14 @@ export default function FormNewHaiku() {
         {/* //////////////////////////////// Texte Règles écriture d'un Haiku //////////////////////////// */}
         <div className="ReglesHaiku">
           <ol>
-          <h5>les règles du Haiku:</h5>
-                      <li> 3 lignes </li>
-                      <li> 30 caractères par ligne </li>
+            <h5>les règles du Haiku:</h5>
+            <li> 3 lignes </li>
+            <li> 30 caractères par ligne </li>
           </ol>
         </div>
       </div>
     </>
+
   );
 }
 
