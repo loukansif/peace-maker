@@ -1,5 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import AppBar from "@mui/material/AppBar";
+import Toolbar from "@mui/material/Toolbar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
@@ -9,6 +11,8 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
+
 
 const theme = createTheme({
   palette: {
@@ -56,77 +60,110 @@ export default function Connexion() {
   };
 
   return (
-    <ThemeProvider theme={theme}>
-      <Container component="main" maxWidth="xs">
-        <CssBaseline />
-        <Box
+    <>
+      <Box sx={{ flexGrow: 1 }}>
+        <AppBar
           sx={{
-            paddingTop: 8,
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center"
+            position: "fixed",
+            bgcolor: "rgba(255,255,255,0)",
+            color: "whitesmoke",
           }}
+          elevation={0}
         >
-          <Typography component="h1" variant="h5">
-            Connexion
-          </Typography>
+          <Toolbar>
+            <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+              <ArrowBackIosNewIcon onClick={() => navigate(-1)}/>
+            </Typography>
+
+            <>
+              <Button
+                color="inherit" 
+                //onClick={() => navigate(-1)}
+          
+                sx={{ border: "solid 1px whitesmoke", borderRadius: "15px" }}
+              >
+                Partager
+              </Button>
+            </>
+
+          </Toolbar>
+        </AppBar>
+      </Box>
+
+
+
+      <ThemeProvider theme={theme}>
+        <Container component="main" maxWidth="xs">
+          <CssBaseline />
           <Box
-            component="form"
-            onSubmit={handleSubmit}
-            noValidate
-            sx={{ mt: 1 }}
+            sx={{
+              paddingTop: 8,
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center"
+            }}
           >
-            <TextField
-              variant="standard"
-              margin="normal"
-              required
-              fullWidth
-              id="email"
-              label="Email"
-              name="email"
-              autoComplete="email"
-              autoFocus
-              color="whiteColor"
-            />
-            <TextField
-              variant="standard"
-              margin="normal"
-              required
-              fullWidth
-              name="password"
-              label="Mot de passe"
-              type="password"
-              id="password"
-              autoComplete="current-password"
-              color="whiteColor"
-            />
-            {/* <FormControlLabel
+            <Typography component="h1" variant="h5">
+              Connexion
+            </Typography>
+            <Box
+              component="form"
+              onSubmit={handleSubmit}
+              noValidate
+              sx={{ mt: 1 }}
+            >
+              <TextField
+                variant="standard"
+                margin="normal"
+                required
+                fullWidth
+                id="email"
+                label="Email"
+                name="email"
+                autoComplete="email"
+                autoFocus
+                color="whiteColor"
+              />
+              <TextField
+                variant="standard"
+                margin="normal"
+                required
+                fullWidth
+                name="password"
+                label="Mot de passe"
+                type="password"
+                id="password"
+                autoComplete="current-password"
+                color="whiteColor"
+              />
+              {/* <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
               label="Remember me"
             /> */}
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}
-            >
-              Connexion
-            </Button>
-            <Grid container>
-              <Grid item xs>
-                <Link href="#" variant="body2" sx={{ color: "white" }}>
-                  Mot de passe oublié ?
-                </Link>
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                sx={{ mt: 3, mb: 2 }}
+              >
+                Connexion
+              </Button>
+              <Grid container>
+                <Grid item xs>
+                  <Link href="#" variant="body2" sx={{ color: "white" }}>
+                    Mot de passe oublié ?
+                  </Link>
+                </Grid>
+                <Grid item>
+                  <Link href="/inscription" variant="body2" sx={{ color: "white" }}>
+                    {"Pas de compte ? Inscrivez-vous"}
+                  </Link>
+                </Grid>
               </Grid>
-              <Grid item>
-                <Link href="/inscription" variant="body2" sx={{ color: "white" }}>
-                  {"Pas de compte ? Inscrivez-vous"}
-                </Link>
-              </Grid>
-            </Grid>
+            </Box>
           </Box>
-        </Box>
-      </Container>
-    </ThemeProvider>
+        </Container>
+      </ThemeProvider>
+    </>
   );
 }

@@ -14,15 +14,15 @@ import Footer from "./components/Footer";
 export default function App() {
   return (
     <>
-      <Nav />
+      
       <div className="App">
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/inscription" element={<SignUp />} />
-          <Route path="/connexion" element={<SignIn />} />
+          <Route path="/" element={<><Nav /><Home /></>} />
+          <Route path="/inscription" element={<><SignUp /></>} />
+          <Route path="/connexion" element={<><SignIn /></>} />
           {/* <Route path="/profil" element={<Profil />} /> */}
-          <Route path="/parametres" element={<Settings />} />
-          <Route path="*" element={<PageNotFound />} />
+          <Route path="/parametres" element={<><Settings /></>} />
+          <Route path="*" element={<><Nav /><PageNotFound /></>} />
         </Routes>
       </div>
       <Footer />
