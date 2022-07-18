@@ -6,10 +6,8 @@ const haikuSchema = new mongoose.Schema({
   line3: String,
   emoji: String,
   createdAt: String,
-  reactions: Array
-  user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
-  text: String,
-  emoji: String
+  reactions: Array,
+  user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' }
 })
 
 const Haikus = mongoose.model('Haikus', haikuSchema);
