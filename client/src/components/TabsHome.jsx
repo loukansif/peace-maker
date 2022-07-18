@@ -60,20 +60,20 @@ export default function TabsHome() {
                         {haikus.map((haiku) => {
                             return (
                                 <>
-                                    <Paper elevation={8} sx={{ margin: 8, padding: 2, backgroundColor: 'rgba(255,255,255,0)', color: 'whitesmoke', width: '90%' }}>
+                                    <Paper elevation={8} sx={{ padding: 2, backgroundColor: 'rgba(255,255,255,0)', color: 'whitesmoke', width: '90%' }}>
                                     {users.map((user) => {
                                         if (user._id == haiku.userId) {
                                             return (
                                                 <>
-                                                    <Avatar className="totemPosition" sx={{ width: 90, height: 90 }} src={user.totem} />
+                                                    <Avatar className="totemPosition" sx={{ width: 70, height: 70 }} src={user.totem} />
                                                 </>
                                             )
                                         }
                                     }
                                     )}
+                                        <p>{haiku.line1}</p>
                                         <p>{haiku.line2}</p>
                                         <p>{haiku.line3}</p>
-                                        <p>{haiku.line1}</p>
                                         <Avatar sx={{ width: 30, height: 30, position: 'relative', left: '100%', }} src={haiku.emoji} />
                                     </Paper>
                                 </>

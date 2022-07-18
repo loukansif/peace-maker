@@ -8,7 +8,14 @@ import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
-const theme = createTheme();
+const theme = createTheme({
+  palette: {
+    whiteColor: {
+      main: '#fff',
+      contrastText: '#fff',
+    },
+  },
+});
 
 export default function Settings() {
   let navigate = useNavigate();
@@ -100,6 +107,7 @@ export default function Settings() {
                   variant="standard"
                   onChange={(e) => updateForm({ password: e.target.value })}
                   autoComplete="new-password"
+                  color="whiteColor"
                 />
               </Grid>
               <Grid item xs={12}>
@@ -112,6 +120,7 @@ export default function Settings() {
                   id="passwordControl"
                   autoComplete="new-password"
                   variant="standard"
+                  color="whiteColor"
                 />
               </Grid>
               <Grid item xs={12} className="totemItems">
