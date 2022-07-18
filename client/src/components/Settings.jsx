@@ -96,7 +96,14 @@ export default function Settings() {
             <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
               <ArrowBackIosNewIcon onClick={() => navigate(-1)}/>
             </Typography>
-
+            <div className="navUserTotem">
+                <a href="/profil">
+                  <img
+                    src={`${localStorage.getItem("userTotem")}`}
+                    className="navUserImg"
+                  />
+                </a>
+              </div>
           </Toolbar>
         </AppBar>
       </Box>
