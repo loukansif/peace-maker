@@ -10,7 +10,6 @@ import PageNotFound from './components/PageNotFound'
 import Settings from './components/Settings'
 import Footer from "./components/Footer";
 import FormNewHaiku from "./components/FormNewHaiku";
-import ValidationNewHaiku from "./components/ValidationNewHaiku";
 
 
 export default function App() {
@@ -26,7 +25,6 @@ export default function App() {
           <Route path="/inscription" element={<SignUp />} />
           <Route path="/connexion" element={<SignIn />} />
           <Route path="/newhaiku" element={<FormNewHaiku />} />
-          <Route path="/validationNewHaiku" element={<ValidationNewHaiku />} />
           {/* <Route path="/profil" element={<Profil />} /> */}
           <Route path="/parametres" element={<><Settings /></>} />
           <Route path="*" element={<><Nav /><PageNotFound /></>} />

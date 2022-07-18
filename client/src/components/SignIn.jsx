@@ -75,17 +75,6 @@ export default function Connexion() {
               <ArrowBackIosNewIcon onClick={() => navigate(-1)}/>
             </Typography>
 
-            <>
-              <Button
-                color="inherit" 
-                //onClick={() => navigate(-1)}
-          
-                sx={{ border: "solid 1px whitesmoke", borderRadius: "15px" }}
-              >
-                Partager
-              </Button>
-            </>
-
           </Toolbar>
         </AppBar>
       </Box>
