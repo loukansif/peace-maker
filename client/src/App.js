@@ -18,7 +18,7 @@ export default function App() {
       
       <div className="App">
         <Routes>
-          <Route path="/" element={<><Nav /><Home /></>} />
+          <Route path="/:id" element={<><Nav /><Home /></>} />
           <Route path="/inscription" element={<><SignUp /></>} />
           <Route path="/connexion" element={<><SignIn /></>} />
           <Route path="/" element={<Home />} />
