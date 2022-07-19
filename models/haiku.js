@@ -6,7 +6,7 @@ const haikuSchema = new mongoose.Schema({
   line3: String,
   emoji: String,
   createdAt: String,
-  reactions: Array,
+  reactions: Object,
   user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' }
 })
 
