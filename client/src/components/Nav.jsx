@@ -6,7 +6,7 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import img from "../assets/img/logo_haiku.png";
-import imgSettings from "../assets/img/settings.svg";
+
 
 export default function ButtonAppBar() {
   return (
@@ -27,15 +27,13 @@ export default function ButtonAppBar() {
           </Typography>
           {localStorage.getItem("userIsLogged") ? (
             <>
-              <a href="/parametres">
-                <img src={imgSettings} className="settingsLogo" />
-              </a>
-
               <div className="navUserTotem">
-                <img
-                  src={`${localStorage.getItem("userTotem")}`}
-                  className="navUserImg"
-                />
+                <a href="/profil">
+                  <img
+                    src={`${localStorage.getItem("userTotem")}`}
+                    className="navUserImg"
+                  />
+                </a>
               </div>
             </>
           ) : (

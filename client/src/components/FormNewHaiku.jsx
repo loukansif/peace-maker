@@ -13,8 +13,8 @@ import Button from "@mui/material/Button";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import Grid from "@mui/material/Grid";
+import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 
-import backIcone from "../assets/icones/backArrow.png";
 
 import "../formHaiku.scss";
 
@@ -96,13 +96,7 @@ export default function FormNewHaiku() {
         >
           <Toolbar>
             <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-              <a href="/">
-                <img
-                  src={backIcone}
-                  className="backIcone"
-                  alt="fleche-retour"
-                ></img>
-              </a>
+            <ArrowBackIosNewIcon onClick={() => navigate(-1)}/>
             </Typography>
             <Button
               color="inherit"
