@@ -25,7 +25,7 @@ export default function NewHaikuButton() {
                         <img src={NewHaikuButtonIcone} className="NewHaikuButtonIcone" alt="ecrire un nouvel haiku"></img>
                     </a>
                 :
-                <a to="/connexion" >
+                <a href="/connexion" >
                         <img src={NewHaikuButtonIcone} className="NewHaikuButtonIcone" alt="ecrire un nouvel haiku"></img>
                     </a>
                 }
