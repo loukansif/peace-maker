@@ -35,7 +35,7 @@ export default function TabsHome() {
   }, []);
 
   return (
-    <Box sx={{ dp: 2, width: "110%", typography: "body1" }} className="margTop">
+    <Box sx={{ dp: 2, width: "100%", typography: "body1" }} className="margTop">
       <TabContext value={value}>
         <Box
           sx={{ borderBottom: 0, borderColor: "divider" }}
