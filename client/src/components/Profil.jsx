@@ -7,6 +7,7 @@ import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import imgSettings from "../assets/img/settings.svg";
+import NewHaikuButton from "./NewHaikuButton.jsx";
 
 export default function Profil() {
     let navigate = useNavigate();
@@ -43,6 +44,7 @@ export default function Profil() {
 
             <div className="main">
                 <TabsProfil />
+                <NewHaikuButton />
             </div>
         </>
 
