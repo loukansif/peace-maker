@@ -6,6 +6,7 @@ export async function getHaikus(){
     const haikuList = await Haikus
       .find()
       .populate('user')
+
       return haikuList
 }
 
@@ -19,12 +20,15 @@ export async function getOneHaiku(id){
 
 
 // function de création d'un haiku
-export async function createHaiku(haikuData){
-    
-    const haiku = new Haikus(haikuData)
-   
+export async function createHaiku(haikuData){    
+    const haiku = new Haikus(haikuData)   
     const result = await haiku.save()
-    
+
     return result
+}
+
+
+export async function updateHaiku(_id, body) {
+  return await Haikus.findOneAndUpdate({_id: _id}, {...body})
 }
 

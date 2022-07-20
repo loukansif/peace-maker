@@ -13,7 +13,7 @@
   padding: 45px 10px 0;
 }
 
-.App {  
+.App {
   min-height: calc(100vh - 305px);
 }
 
@@ -56,12 +56,6 @@ body {
   text-align: center;
 }
 
-.totemPosition {
-  position: relative;
-  top: -50px;
-  left:-50px;
-}
-
 .totemItem {
   width: 70px;
 }
@@ -70,6 +64,25 @@ body {
   border: 1px solid white;
   border-radius: 25px;
   width: 75px;
+}
+
+.totemPosition {
+  position: relative;
+  top: -50px;
+  left: -50px;
+}
+
+.emojiPosition {
+  width: 50px !important;
+  height: 50px !important;
+  position: absolute !important;
+  left: 87%;
+}
+
+@media (max-width: 880px) {
+  .emojiPosition {
+    left: 82%;
+  }
 }
 
 .navUserImg {
@@ -139,6 +152,36 @@ text-decoration: none;
 
 #Root {
   height: 100%;
+}
+
+.haikuDisplay {
+  filter: blur(0.5rem);
+}
+
+.emojiContainer {
+  position: relative;
+  width: 64px;
+  span {
+    color: #949494;
+    position: absolute;
+    bottom: 10px;
+    right: 5px;
+  }
+}
+
+.emojisSelect {
+  width: 325px;
+  z-index: 1;
+  position: fixed;
+  background-color: black;
+  border-radius: 25px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.emojisSelectItem {
+  width: 64px;
 }
 
 ////////////// footer //////////////
