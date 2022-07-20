@@ -101,6 +101,7 @@ export default function Settings() {
                   <img
                     src={`${localStorage.getItem("userTotem")}`}
                     className="navUserImg"
+                    alt="totem"
                   />
                 </a>
               </div>
