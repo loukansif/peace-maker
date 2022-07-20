@@ -18,6 +18,7 @@ export default function ButtonAppBar() {
           color: "whitesmoke",
         }}
         elevation={0}
+        className="blur"
       >
         <Toolbar>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>

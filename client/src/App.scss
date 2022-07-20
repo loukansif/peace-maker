@@ -28,6 +28,11 @@ body {
   text-align: center;
 }
 
+.blur {
+  z-index:100;
+  backdrop-filter: blur(10px);
+}
+
 @media (max-width: 880px) {
   .title {
     text-align: center;
