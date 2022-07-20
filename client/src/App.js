@@ -10,6 +10,7 @@ import Profil from './components/Profil'
 import Settings from './components/Settings'
 import Footer from "./components/Footer";
 import FormNewHaiku from "./components/FormNewHaiku";
+import MoodSelection from "./components/MoodSelection";
 
 
 export default function App() {
@@ -28,6 +29,7 @@ export default function App() {
           <Route path="/profil" element={<Profil />} />
           <Route path="/parametres" element={<><Settings /></>} />
           <Route path="*" element={<><Nav /><PageNotFound /></>} />
+          <Route path="/moodselection" element={<><Nav /><MoodSelection /></>} />
         </Routes>
       </div>
       <Footer />

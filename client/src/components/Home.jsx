@@ -8,8 +8,8 @@ export default function Home() {
     <>
     <div className="main">
       <TabsHome />
-    </div>
       <NewHaikuButton />
+    </div>
       </>
   );
 }

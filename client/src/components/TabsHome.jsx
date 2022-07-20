@@ -106,5 +106,6 @@ export default function TabsHome() {
         <TabPanel value="3">Item Three</TabPanel>
       </TabContext>
     </Box>
+    
   );
 }
