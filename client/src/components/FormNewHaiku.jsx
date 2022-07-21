@@ -1,7 +1,3 @@
-import React, { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import Input from "@mui/material/Input";
-
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Typography from "@mui/material/Typography";
@@ -10,13 +6,9 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
-import Grid from "@mui/material/Grid";
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import FormData from 'form-data'
 import axios from 'axios'
-
-
-import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import "../formHaiku.scss";
 import mongoose from "mongoose";
 
@@ -76,7 +68,7 @@ axios({
 .then(function (response) {
   // on success: handle response
   console.log(response.data.profanity.matches.length);
-  if(response.data.profanity.matches.length !=0) {
+  if(response.data.profanity.matches.length !== 0) {
     alert('pas de gros mots')
     window.location.reload();
   }
