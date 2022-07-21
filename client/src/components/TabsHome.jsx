@@ -85,7 +85,7 @@ export default function TabsHome() {
 
   useEffect(() => {
     getHaikus();
-  }, [setCurrentHaiku]);
+  }, [currentHaiku]);
 
   return (
     <Box sx={{ dp: 2, width: "100%", typography: "body1" }} className="margTop">
@@ -146,14 +146,12 @@ export default function TabsHome() {
                 }
               }
               return (
-                <>
+                <div key={haiku._id}>
                   <div
                     className={currentHaiku ? "haikuDisplay" : ""}
                     onClick={closeVote}
                   >
-                    <Paper
-                      key={haiku._id}
-                      elevation={8}
+                    <Paper                      elevation={8}
                       sx={{
                         padding: 2,
                         backgroundColor: "rgba(255,255,255,0)",
@@ -179,10 +177,10 @@ export default function TabsHome() {
                         className="emojiPosition"
                         src={imgEmoji}
                         onClick={() => emojisFunction(haiku)}
-                      />
+                      />                      
                     </Paper>
                   </div>
-                </>
+                </div>
               );
             })}
           </div>
