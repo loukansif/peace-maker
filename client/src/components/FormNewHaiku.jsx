@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import Input from "@mui/material/Input";
 
@@ -14,6 +14,8 @@ import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import Grid from "@mui/material/Grid";
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
+import FormData from 'form-data'
+import axios from 'axios'
 
 
 import "../formHaiku.scss";
@@ -37,6 +39,40 @@ export default function FormNewHaiku() {
     emoji: "",
     createdAt: "",
   });
+
+  // modération /////////////////////////////////////////
+function sightEngine() {
+
+let data = new FormData();
+data.append('text', form.line1 + form.line2 + form.line3);
+data.append('lang', 'fr');
+data.append('mode', 'standard');
+data.append('api_user', '323671425');
+data.append('api_secret', 'vGeWd6t4TaMFxVYL5JtB');
+
+// fetch sightEngine
+axios({
+  url: 'https://api.sightengine.com/1.0/text/check.json',
+  method:'post',
+  data: data,
+  headers: data.getHeaders ? data.getHeaders() : { 'Content-Type': 'multipart/form-data' }
+})
+.then(function (response) {
+  // on success: handle response
+  console.log(response.data.profanity.matches.length);
+  if(response.data.profanity.matches.length !=0) {
+    alert('pas de gros mots')
+    window.location.reload();
+  }
+})
+.catch(function (error) {
+  // handle error
+  if (error.response) console.log(error.response.data);
+  else console.log(error.message);
+});
+}
+
+// fin modération /////////////////////////////
 
   function updateForm(value) {
     console.log(value);
@@ -146,6 +182,7 @@ export default function FormNewHaiku() {
                       createdAt: new Date(),
                     });
                     sethaiku_Line_1_Length(30 - e.target.value.length);
+                    sightEngine();
                   }}
                 />
               </div>
@@ -158,6 +195,7 @@ export default function FormNewHaiku() {
                   onChange={(e) => {
                     updateForm({ line2: e.target.value });
                     sethaiku_Line_2_Length(30 - e.target.value.length);
+                    sightEngine();
                   }}
                 />
               </div>
@@ -171,6 +209,7 @@ export default function FormNewHaiku() {
                   onChange={(e) => {
                     updateForm({ line3: e.target.value });
                     sethaiku_Line_3_Length(30 - e.target.value.length);
+                    sightEngine();
                   }}
                 />
               </div>
