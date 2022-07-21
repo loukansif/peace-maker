@@ -68,7 +68,7 @@ export default function TabsHome() {
     let updateHaiku = {...newReactions};
     console.log(JSON.stringify(updateHaiku))
     // console.log(JSON.stringify(haikuIdParam.id)) 
-    let haikuIdParamNumber = haikuIdParam.id
+    let haikuIdParamNumber = haikuIdParam.id 
     console.log(haikuIdParamNumber)
     fetch(`http://localhost:5000/haikus/${haikuIdParamNumber}`, 
         {

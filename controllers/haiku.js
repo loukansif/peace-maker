@@ -28,3 +28,8 @@ export async function createHaiku(haikuData){
     return result
 }
 
+// function d'update d'un haiku
+export async function updateHaiku(_id, body) {
+  console.log(body)
+  return await Haikus.findOneAndUpdate({_id : _id}, {...body})
+}
