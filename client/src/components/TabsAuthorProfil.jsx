@@ -8,11 +8,11 @@ import Paper from "@mui/material/Paper";
 import Avatar from "@mui/material/Avatar";
 import Typography from "@mui/material/Typography";
 
-import { useNavigate } from "react-router-dom";
-
+import { useNavigate, useParams } from "react-router-dom";
 
 export default function TabsHome() {
   let navigate = useNavigate()
+  let { authorId } = useParams() 
 
   const [currentHaiku, setCurrentHaiku] = useState(null);
   let imgEmoji = "";
@@ -45,7 +45,7 @@ export default function TabsHome() {
   // récupération de tous les Haikus
 
   const getHaikus = () => {
-    fetch("http://localhost:5000/haikus")
+    fetch(`http://localhost:5000/haikus/`)
       .then((response) => {
         return response.json();
       })
@@ -91,6 +91,10 @@ export default function TabsHome() {
   useEffect(() => {
     getHaikus();
   }, [setCurrentHaiku]);
+
+  useEffect(() => {
+    getHaikus();
+  }, []);
 
 ////////////////////////////////////////////////////////////////////////////////////
 const toAuthorProfil = (authorId) => {
@@ -157,6 +161,7 @@ const toAuthorProfil = (authorId) => {
                   imgEmoji = reactionsImg[i];
                 }
               }
+              if (haiku.user = authorId) {
               return (
                 <>
                   <div
@@ -198,7 +203,7 @@ const toAuthorProfil = (authorId) => {
                     </Paper>
                   </div>
                 </>
-              );
+              )};
             })}
           </div>
         </TabPanel>

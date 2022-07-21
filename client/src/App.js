@@ -11,6 +11,7 @@ import Settings from './components/Settings'
 import Footer from "./components/Footer";
 import FormNewHaiku from "./components/FormNewHaiku";
 import MoodSelection from "./components/MoodSelection";
+import AuthorProfil from "./components/AuthorProfil"
 
 
 export default function App() {
@@ -30,6 +31,7 @@ export default function App() {
           <Route path="/parametres" element={<><Settings /></>} />
           <Route path="*" element={<><Nav /><PageNotFound /></>} />
           <Route path="/moodselection" element={<><Nav /><MoodSelection /></>} />
+          <Route path="/authorProfil/:_id" element={<AuthorProfil />} />
         </Routes>
       </div>
       <Footer />
