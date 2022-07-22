@@ -36,7 +36,6 @@ body {
 .blur {
   z-index:100;
   backdrop-filter: blur(10px);
-
 }
 
 @media (max-width: 880px) {
@@ -49,6 +48,14 @@ body {
   margin-top: 76px;
 }
 
+.blurBackground{
+  position: fixed;
+  top: 0;
+  height: 80px;
+  width: 100%;
+  backdrop-filter: blur(10px);
+  z-index: 999;
+}
 .logoHaiku {
   margin-top: 8px;
   margin-left: 20px;
@@ -107,14 +114,28 @@ height: 0
   border-radius: 25px;
 }
 .settingsLogo {
-  margin-right: 10px;
+  margin-right: 20px;
+  margin-top: 8px;
   width: 25px;
+  filter: invert(0.80)
 }
 
 .textHaiku {
   padding-left: 16px;
+  padding-top: -10px;
 }
-
+.tabEmptySpace {
+  margin-top: -14px;
+  height: 70px;
+}
+.loadMoreHaikusIcone {
+  color: rgba(255, 255, 255, 0.8);
+  text-align: center
+}
+.loadMoreHaikusIcone {
+  color: rgba(255, 255, 255, 0.8);
+  text-align: center
+}
 /////////////////////////////////////////////
 // BOUTONS FOOTER FILTRES ET NOUVEL HAIKU //
 

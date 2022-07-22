@@ -99,16 +99,20 @@ export default function TabsHome() {
           top="8%"
           className="blur"
         >
-          <TabList onChange={handleChange} aria-label="lab API tabs example"
-          style={{ top: 60 , left : 0, marginTop: 20}}>
+          <TabList
+            onChange={handleChange}
+            aria-label="lab API tabs example"
+            style={{ top: 60, left: 0, marginTop: 18 }}
+            TabIndicatorProps={{ style: { backgroundColor: "white"} }}
+          >
             <Tab
-              style={{ textTransform: "none", fontSize: 18}}
+              style={{ textTransform: "none", fontSize: 18 }}
               label="new"
               value="1"
               sx={{ color: "whitesmoke !important" }}
             />
             <Tab
-              style={{ textTransform: "none", fontSize: 18}}
+              style={{ textTransform: "none", fontSize: 18 }}
               label="top"
               value="2"
               sx={{ color: "whitesmoke !important" }}
@@ -121,7 +125,7 @@ export default function TabsHome() {
             />
           </TabList>
         </Box>
-        <TabPanel value="1">
+        <TabPanel value="1" style={{ top: 60, left: 0, marginLeft: 10 }}>
           {currentHaiku && (
             <div className="emojisSelect">
               {reactionsImg.map((i, index) => {
@@ -175,7 +179,7 @@ export default function TabsHome() {
                         />
                       </a>
                       <div className="textHaiku">
-                        <Typography sx={{ marginTop: -8 }}>
+                        <Typography sx={{ marginTop: -9 }}>
                           {haiku.line1}
                         </Typography>
                         <Typography>{haiku.line2}</Typography>
@@ -192,6 +196,9 @@ export default function TabsHome() {
                 </div>
               );
             })}
+          </div>
+          <div className="tabEmptySpace">
+            <p className="loadMoreHaikusIcone"> load more </p>
           </div>
         </TabPanel>
         <TabPanel value="2">Item Two</TabPanel>
