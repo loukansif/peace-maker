@@ -4,13 +4,17 @@
   font-family: Open Sans;
 }
 
+
+
 .main {
-  margin: auto 10px;
+  // margin: auto 10px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 45px 10px 0;
+  // padding: 45px 10px 0;
+  padding: 45px 0px 0;
+
 }
 
 .App {
@@ -42,11 +46,16 @@ body {
   }
 }
 .margTop {
-  margin-top: 100px;
+  margin-top: 76px;
 }
 
 .logoHaiku {
+  margin-top: 8px;
+  margin-left: 20px;
   width: 80px;
+}
+.buttonNav { 
+  margin-right: 14px;
 }
 .logoImg {
   width: 110px;
@@ -87,9 +96,12 @@ body {
 
 .navUserImg {
   width: 40px;
-  max-height: 35px;
+  max-height: 30px;
+  margin-top: 4px;
 }
-
+.navUserImgLink {
+height: 0
+;}
 .navUserTotem {
   border: 1px solid white;
   border-radius: 25px;
@@ -97,6 +109,10 @@ body {
 .settingsLogo {
   margin-right: 10px;
   width: 25px;
+}
+
+.textHaiku {
+  padding-left: 16px;
 }
 
 /////////////////////////////////////////////

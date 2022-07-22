@@ -96,22 +96,26 @@ export default function TabsHome() {
           justifyContent="center"
           width="100%"
           position="fixed"
-          top="6%"
+          top="8%"
           className="blur"
         >
-          <TabList onChange={handleChange} aria-label="lab API tabs example">
+          <TabList onChange={handleChange} aria-label="lab API tabs example"
+          style={{ top: 60 , left : 0, marginTop: 20}}>
             <Tab
-              label="New"
+              style={{ textTransform: "none", fontSize: 18}}
+              label="new"
               value="1"
               sx={{ color: "whitesmoke !important" }}
             />
             <Tab
-              label="Top"
+              style={{ textTransform: "none", fontSize: 18}}
+              label="top"
               value="2"
               sx={{ color: "whitesmoke !important" }}
             />
             <Tab
-              label="Flow"
+              style={{ textTransform: "none", fontSize: 18 }}
+              label="flow"
               value="3"
               sx={{ color: "whitesmoke !important" }}
             />
@@ -159,21 +163,24 @@ export default function TabsHome() {
                         color: "whitesmoke",
                         width: "90%",
                         marginBottom: 4,
+                        borderRadius: "25px",
                       }}
                     >
-                      <a  href={"/profil/" + haiku.user._id}>
-                      <Avatar
-                        key={haiku.user._id}
-                        className="totemPosition"
-                        sx={{ width: 70, height: 70 }}
-                        src={haiku.user.totem}
-                      />
+                      <a href={"/profil/" + haiku.user._id}>
+                        <Avatar
+                          key={haiku.user._id}
+                          className="totemPosition"
+                          sx={{ width: 70, height: 70 }}
+                          src={haiku.user.totem}
+                        />
                       </a>
-                      <Typography sx={{ marginTop: -5 }}>
-                        {haiku.line1}
-                      </Typography>
-                      <Typography>{haiku.line2}</Typography>
-                      <Typography>{haiku.line3}</Typography>
+                      <div className="textHaiku">
+                        <Typography sx={{ marginTop: -8 }}>
+                          {haiku.line1}
+                        </Typography>
+                        <Typography>{haiku.line2}</Typography>
+                        <Typography>{haiku.line3}</Typography>
+                      </div>
 
                       <Avatar
                         className="emojiPosition"

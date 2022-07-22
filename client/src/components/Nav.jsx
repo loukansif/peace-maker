@@ -8,15 +8,20 @@ import Button from "@mui/material/Button";
 import img from "../assets/img/logo_haiku.png";
 
 
+
+
+
 export default function ButtonAppBar() {
   return (
-    <Box sx={{ flexGrow: 1 }}>
+
+    <Box sx={{ flexGrow: 1, p: 2 }} mb={-4} >
       <AppBar
         sx={{
           position: "fixed",
           bgcolor: "rgba(255,255,255,0)",
           color: "whitesmoke",
         }}
+        style={{ position: 'fixed', top: 20 , left : 0, height: 36 }}
         elevation={0}
         className="blur"
       >
@@ -29,7 +34,7 @@ export default function ButtonAppBar() {
           {localStorage.getItem("userIsLogged") ? (
             <>
               <div className="navUserTotem">
-                <a href="/profil">
+                <a href="/profil" className="navUserImgLink">
                   <img
                     src={`${localStorage.getItem("userTotem")}`}
                     className="navUserImg"
@@ -38,15 +43,16 @@ export default function ButtonAppBar() {
               </div>
             </>
           ) : (
-            <>
+            <div className="buttonNav">
               <Button
+              style={{textTransform: 'none'}}
                 color="inherit"
                 href="/connexion"
-                sx={{ border: "solid 1px whitesmoke", borderRadius: "15px" }}
+                sx={{ border: "solid 1px whitesmoke", borderRadius: "18px", pl:2, pr:2 }}
               >
-                Connexion
+                connexion
               </Button>
-            </>
+            </div>
           )}
         </Toolbar>
       </AppBar>
