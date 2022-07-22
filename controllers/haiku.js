@@ -11,6 +11,16 @@ export async function getHaikus(){
       return haikuList
 }
 
+// function de récupération de  tous les Haikus ordered par vote
+export async function getHaikusOrdered(){
+  const haikuList = await Haikus
+    .find()
+    .sort({'totalVote': "desc"})
+    .populate('user')
+
+    return haikuList
+}
+
 // function de récupération des Haikus ordonnés par vote
 // export async function getHaikusOrdered(){
 //   const haikuList = await Haikus
