@@ -22,8 +22,8 @@ export async function getOneUserById(id){
 
 export async function createUser(userData){
     
-    const User = new User(userData)   
-    const result = await User.save()
+    const user = new User(userData)   
+    const result = await user.save()
     
     return result
 }

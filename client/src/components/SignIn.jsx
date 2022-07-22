@@ -12,6 +12,12 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
+import Snackbar from "@mui/material/Snackbar";
+import MuiAlert from "@mui/material/Alert";
+
+const Alert = React.forwardRef(function Alert(props, ref) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
 
 
 const theme = createTheme({
@@ -41,7 +47,7 @@ export default function Connexion() {
       .then((resp) => resp.json())
       .then((jresponse) => {
         if (jresponse === null) {
-          alert("Erreur email ou mot de passe");
+          handleClickAlert();
         } else if (pass === jresponse.password) {
           localStorage.setItem("userId", jresponse._id);
           localStorage.setItem("userLastName", jresponse.lastname);
@@ -51,12 +57,46 @@ export default function Connexion() {
           localStorage.setItem("userTotem", jresponse.totem);
           localStorage.setItem("userPass", jresponse.password);
           localStorage.setItem("userIsLogged", true);
-          navigate("/", { replace: true });
-          window.location.reload();
+          handleClickAlertConnect()
+          // window.location.reload();
         } else {
-          alert("erreur email ou mot de passe");
+          handleClickAlert();
         }
       });
+  };
+
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickAlert = () => {
+    setOpen(true);
+  };
+
+  const handleCloseAlert = (event, reason) => {
+    
+    if (reason === "clickaway") {
+      return;
+    }
+    
+    setOpen(false);
+    window.location.reload();
+  };
+
+
+
+  const [openConnect, setOpenConnect] = React.useState(false);
+
+  const handleClickAlertConnect = () => {
+    setOpenConnect(true);
+  };
+
+  const handleCloseAlertConnect = (event, reason) => {
+    
+    if (reason === "clickaway") {
+      return;
+    }
+    
+    setOpenConnect(false);    
+    navigate("/", { replace: true });
   };
 
   return (
@@ -153,6 +193,16 @@ export default function Connexion() {
           </Box>
         </Container>
       </ThemeProvider>
+      <Snackbar open={open} autoHideDuration={2000} onClose={handleCloseAlert}>
+        <Alert onClose={handleCloseAlert} severity="warning" sx={{ width: "100%" }}>
+           Erreur email ou mot de passe!
+        </Alert>
+      </Snackbar>
+      <Snackbar open={openConnect} autoHideDuration={2000} onClose={handleCloseAlertConnect}>
+        <Alert onClose={handleCloseAlertConnect} severity="success" sx={{ width: "100%" }}>
+           Bienvenue {localStorage.getItem("userFirtsName")} !
+        </Alert>
+      </Snackbar>
     </>
   );
 }

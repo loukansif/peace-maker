@@ -11,6 +11,12 @@ import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
+import Snackbar from "@mui/material/Snackbar";
+import MuiAlert from "@mui/material/Alert";
+
+const Alert = React.forwardRef(function Alert(props, ref) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
 
 const theme = createTheme({
   palette: {
@@ -39,9 +45,7 @@ export default function Settings() {
   }
 
   const deconnect = () => {
-    localStorage.clear();
-    navigate("/", { replace: true });
-    window.location.reload();
+    handleClickAlertDeconnect()
   };
 
   const handleSubmit = (event) => {
@@ -68,17 +72,64 @@ export default function Settings() {
         }
       )
         .then(() => {
-          alert("Vos paramètres sont modifiés");
-          navigate("/", { replace: true });
-          window.location.reload();
+          handleClickAlert()
         })
         .catch((error) => {
           window.alert(error);
           return;
         });
     } else {
-      alert("les mots de passe ne sont pas identiques");
+      handleClickAlertPass()
     }
+  };
+
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickAlert = () => {
+    setOpen(true);
+  };
+
+  const handleCloseAlert = (event, reason) => {
+    
+    if (reason === "clickaway") {
+      return;
+    }
+    
+    setOpen(false);
+    navigate("/", { replace: true });
+  };
+
+  const [openPass, setOpenPass] = React.useState(false);
+
+  const handleClickAlertPass = () => {
+    setOpenPass(true);
+  };
+
+  const handleCloseAlertPass = (event, reason) => {
+    
+    if (reason === "clickaway") {
+      return;
+    }
+    
+    setOpenPass(false);    
+    window.location.reload();
+  };
+
+  const [openDeconnect, setOpenDeconnect] = React.useState(false);
+
+  const handleClickAlertDeconnect = () => {
+    setOpenDeconnect(true);
+  };
+
+  const handleCloseAlertDeconnect = (event, reason) => {
+    
+    if (reason === "clickaway") {
+      return;
+    }
+    
+    setOpenDeconnect(false);      
+    localStorage.clear(); 
+    navigate("/", { replace: true });     
   };
 
   return (
@@ -306,6 +357,22 @@ export default function Settings() {
           </Box>
         </Container>
       </ThemeProvider>
+      <Snackbar open={open} autoHideDuration={2000} onClose={handleCloseAlert}>
+        <Alert onClose={handleCloseAlert} severity="warning" sx={{ width: "100%" }}>
+            Vos paramètres sont modifiés!
+        </Alert>
+      </Snackbar>
+      <Snackbar open={openPass} autoHideDuration={2000} onClose={handleCloseAlertPass}>
+        <Alert onClose={handleCloseAlertPass} severity="warning" sx={{ width: "100%" }}>
+           Les mots de passe ne sont pas identiques!
+        </Alert>
+      </Snackbar>
+      <Snackbar open={openDeconnect} autoHideDuration={2000} onClose={handleCloseAlertDeconnect}>
+        <Alert onClose={handleCloseAlertDeconnect} severity="success" sx={{ width: "100%" }}>
+            {/* Vous êtes déconnecté ! */}
+            Au revoir {localStorage.getItem("userFirtsName")} !
+        </Alert>
+      </Snackbar>
     </div>
     </>
   );
