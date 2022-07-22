@@ -1,5 +1,5 @@
 import express from 'express'
-import {getUsers, getOneUser, createUser, updateUser} from '../controllers/user.js'
+import {getUsers, getOneUser, getOneUserById, createUser, updateUser} from '../controllers/user.js'
 const routerUser = express.Router()
 routerUser.use(express.json())
 routerUser.use(express.urlencoded({ extended: true }))
@@ -11,6 +11,11 @@ routerUser.get('/', async (req, res) => {
 
 routerUser.get('/:email', async (req, res) => {
     let user = await getOneUser(req.params.email)
+    res.json(user)
+})
+
+routerUser.get('/user/:id', async (req, res) => {
+    let user = await getOneUserById(req.params.id)
     res.json(user)
 })
 

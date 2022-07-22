@@ -13,6 +13,12 @@ export async function getOneUser(email){
 
     return oneUser
 }
+export async function getOneUserById(id){
+  const oneUser = await User
+    .findOne({_id: id})
+
+    return oneUser
+}
 
 export async function createUser(userData){
     

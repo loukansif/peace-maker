@@ -1,17 +1,16 @@
 import React, { useState, useEffect } from "react";
 import Box from "@mui/material/Box";
-import Tab from "@mui/material/Tab";
 import TabContext from "@mui/lab/TabContext";
-import TabList from "@mui/lab/TabList";
+import { useParams } from "react-router-dom";
 import TabPanel from "@mui/lab/TabPanel";
 import Paper from "@mui/material/Paper";
 import Avatar from "@mui/material/Avatar";
 import Typography from "@mui/material/Typography";
 
-export default function TabsHome() {
-  const [currentHaiku, setCurrentHaiku] = useState(null);
+export default function TabsProfil() {
+  const { userId } = useParams();
   let imgEmoji = "";
-
+  const [currentHaiku, setCurrentHaiku] = useState(null);
   let reactionsImg = [
     "/assets/emojis/cloud.png",
     "/assets/emojis/feuille_orange.png",
@@ -29,15 +28,14 @@ export default function TabsHome() {
     "/assets/emojis/trefle.png",
     "/assets/emojis/water.png",
   ];
-
   const [value, setValue] = useState("1");
   const [haikus, setHaikus] = useState([]);
 
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
+  const emojisFunction = (haiku) => {
+    setCurrentHaiku(haiku);
   };
 
-  // récupération de tous les Haikus
+  // récupération de tous mes Haikus
 
   const getHaikus = () => {
     fetch("http://localhost:5000/haikus")
@@ -50,92 +48,13 @@ export default function TabsHome() {
       .catch((error) => console.log(error));
   };
 
-  const emojisFunction = (haiku) => {
-    setCurrentHaiku(haiku);
-  };
-
-  const updateVote = (index) => {
-    currentHaiku.reactionss[index]++;
-    updateReactions();
-    closeVote();
-  };
-
-  const closeVote = () => {
-    if (currentHaiku) {
-      setCurrentHaiku(null);
-    }
-  };
-
-  const updateReactions = () => {
-    fetch(`http://localhost:5000/haikus/${currentHaiku._id}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ reactionss: currentHaiku.reactionss }),
-    })
-      .then(() => {
-        alert("Vote enregistré");
-      })
-      .catch((error) => {
-        window.alert(error);
-        return;
-      });
-  };
-
   useEffect(() => {
     getHaikus();
-  }, [currentHaiku]);
-
+  }, []);
   return (
     <Box sx={{ dp: 2, width: "100%", typography: "body1" }} className="margTop">
       <TabContext value={value}>
-        <Box
-          sx={{ borderBottom: 0, borderColor: "divider" }}
-          display="flex"
-          justifyContent="center"
-          width="100%"
-          position="fixed"
-          top="6%"
-          className="blur"
-        >
-          <TabList onChange={handleChange} aria-label="lab API tabs example">
-            <Tab
-              label="New"
-              value="1"
-              sx={{ color: "whitesmoke !important" }}
-            />
-            <Tab
-              label="Top"
-              value="2"
-              sx={{ color: "whitesmoke !important" }}
-            />
-            <Tab
-              label="Flow"
-              value="3"
-              sx={{ color: "whitesmoke !important" }}
-            />
-          </TabList>
-        </Box>
         <TabPanel value="1">
-          {currentHaiku && (
-            <div className="emojisSelect">
-              {reactionsImg.map((i, index) => {
-                return (
-                  <span className="emojiContainer">
-                    <img
-                      src={reactionsImg[index]}
-                      className="emojisSelectItem"
-                      alt=""
-                      onClick={() => updateVote(index)}
-                    />
-                    <span>{currentHaiku.reactionss[index]}</span>
-                  </span>
-                );
-              })}
-            </div>
-          )}
-
           <div className="haikus">
             {haikus.map((haiku) => {
               let nbReaction = 0;
@@ -145,12 +64,9 @@ export default function TabsHome() {
                   imgEmoji = reactionsImg[i];
                 }
               }
-              return (
+              return userId === haiku.user._id ? (
                 <div key={haiku._id}>
-                  <div
-                    className={currentHaiku ? "haikuDisplay" : ""}
-                    onClick={closeVote}
-                  >
+                  <div className={currentHaiku ? "haikuDisplay" : ""}>
                     <Paper
                       elevation={8}
                       sx={{
@@ -161,14 +77,12 @@ export default function TabsHome() {
                         marginBottom: 4,
                       }}
                     >
-                      <a  href={"/profil/" + haiku.user._id}>
                       <Avatar
-                        key={haiku.user._id}
                         className="totemPosition"
                         sx={{ width: 70, height: 70 }}
                         src={haiku.user.totem}
                       />
-                      </a>
+
                       <Typography sx={{ marginTop: -5 }}>
                         {haiku.line1}
                       </Typography>
@@ -183,12 +97,12 @@ export default function TabsHome() {
                     </Paper>
                   </div>
                 </div>
-              );
+              ) : null;
             })}
           </div>
         </TabPanel>
-        <TabPanel value="2">Item Two</TabPanel>
-        <TabPanel value="3">Item Three</TabPanel>
+
+        <TabPanel value="2">My favoris</TabPanel>
       </TabContext>
     </Box>
   );

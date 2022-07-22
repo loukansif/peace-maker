@@ -7,6 +7,7 @@ import SignUp from './components/SignUp'
 import SignIn from './components/SignIn'
 import PageNotFound from './components/PageNotFound'
 import Profil from './components/Profil'
+import Filter from './components/Filter'
 import Settings from './components/Settings'
 import Footer from "./components/Footer";
 import FormNewHaiku from "./components/FormNewHaiku";
@@ -27,6 +28,7 @@ export default function App() {
           <Route path="/connexion" element={<SignIn />} />
           <Route path="/newhaiku" element={<FormNewHaiku />} />
           <Route path="/profil" element={<Profil />} />
+          <Route path="/profil/:userId" element={<Filter />} />
           <Route path="/parametres" element={<><Settings /></>} />
           <Route path="*" element={<><Nav /><PageNotFound /></>} />
           <Route path="/moodselection" element={<><Nav /><MoodSelection /></>} />
