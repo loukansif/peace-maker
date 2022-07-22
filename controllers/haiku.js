@@ -5,10 +5,55 @@ import Haikus from '../models/haiku.js'
 export async function getHaikus(){
     const haikuList = await Haikus
       .find()
+      .sort({'createdAt': "desc"})
       .populate('user')
 
       return haikuList
 }
+
+// function de récupération des Haikus ordonnés par vote
+// export async function getHaikusOrdered(){
+//   const haikuList = await Haikus
+//     .find()
+//     // .aggregate([
+//     //   {
+//     //     $project: {
+//     //       reduced: {
+//     //         $reduce: {
+//     //           input: "$reactionss", 
+//     //           initialValue: 0,
+//     //           in: {
+//     //             $sum: [
+//     //               "$$value",
+//     //               "$$this"
+//     //             ]
+//     //           }
+//     //         }
+//     //       }
+//     //     }
+//     //   }
+//     // ])
+//     .populate('user')
+
+//     let listSum = []
+
+//     function order(x, y) {
+//       let a = x.reactionss
+//       let b = y.reactionss
+//       return a < b ? -1 : (a > b ? 1 : 0);
+//     }
+
+//     let haikuListOrdered = haikuList.map((item) => { 
+//       let initialValue = 0;
+//       let sum = item.reactionss.forEach((el) => { initialValue += el })
+//       console.log('test :',sum)
+//      }).sort(order);
+     
+//     console.log(haikuListOrdered)
+    
+
+//     return haikuListOrdered
+// }
 
 // function de récupération d'un seul Haiku par son id
 export async function getOneHaiku(id){

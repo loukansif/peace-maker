@@ -1,5 +1,5 @@
 import express from 'express'
-import {getHaikus, getOneHaiku, createHaiku, updateHaiku} from '../controllers/haiku.js'
+import {getHaikus, getOneHaiku, createHaiku, updateHaiku, getHaikusOrdered} from '../controllers/haiku.js'
 const routerHaiku = express.Router()
 routerHaiku.use(express.json())
 routerHaiku.use(express.urlencoded({ extended: true }))
@@ -11,11 +11,18 @@ routerHaiku.get('/', async (req, res) => {
     res.json(haikus);
 })
 
+// récupération de tous les Haikus par vote
+routerHaiku.get('/order', async (req, res) => {
+    let HaikusOrdered = await getHaikusOrdered()
+    res.json(HaikusOrdered);
+})
+
 // récupération d'un seul Haiku
 routerHaiku.get('/:_id', async (req, res) => {  
     let haiku = await getOneHaiku(req.params._id)
     res.json(haiku)
 })
+
 
 // Création d'un Haiku
 routerHaiku.post('/', async (req, res) => {
@@ -23,11 +30,11 @@ routerHaiku.post('/', async (req, res) => {
     res.send(newHaiku)
 })
 
+// Modification d'un Haiku (vote réaction)
 routerHaiku.put('/:_id', async (req, res) => {
     let updateOneHaiku = await updateHaiku(req.params._id, req.body)
     res.send(updateOneHaiku)
-        });
+})
 
 
-
-export default routerHaiku
+export default routerHaiku  

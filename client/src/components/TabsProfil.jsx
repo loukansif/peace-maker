@@ -62,6 +62,10 @@ export default function TabsProfil() {
           sx={{ borderBottom: 0, borderColor: "divider" }}
           display="flex"
           justifyContent="center"
+          width="100%"
+          position="fixed"
+          top="6%"
+          className="blur"
         >
           <TabList onChange={handleChange} aria-label="lab API tabs example">
             <Tab
