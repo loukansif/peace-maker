@@ -1,5 +1,5 @@
 import express from 'express'
-import {getHaikus, getOneHaiku, createHaiku, updateHaiku, getHaikusOrdered} from '../controllers/haiku.js'
+import {getHaikus, getOneHaiku, createHaiku, updateHaiku} from '../controllers/haiku.js'
 const routerHaiku = express.Router()
 routerHaiku.use(express.json())
 routerHaiku.use(express.urlencoded({ extended: true }))
