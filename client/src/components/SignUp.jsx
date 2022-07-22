@@ -8,6 +8,12 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import Snackbar from "@mui/material/Snackbar";
+import MuiAlert from "@mui/material/Alert";
+
+const Alert = React.forwardRef(function Alert(props, ref) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
 
 const theme = createTheme({
   palette: {
@@ -27,6 +33,7 @@ export default function Inscription() {
     email: "",
     password: "",
     totem: "/assets/totem/abeille.png",
+    following:[]
   });
 
   function updateForm(value) {
@@ -51,9 +58,9 @@ export default function Inscription() {
         body: JSON.stringify(newUser),
       })
         .then(() => {
-          alert("vous etes enregistré");
-          navigate("/connexion", { replace: true });
-          window.location.reload();
+          // alert("vous etes enregistré");
+          
+          handleClickAlert();
         })
         .catch((error) => {
           window.alert(error);
@@ -63,6 +70,22 @@ export default function Inscription() {
     } else {
       alert("les mots de passe ne sont pas identiques");
     }
+  };
+
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickAlert = () => {
+    setOpen(true);
+  };
+
+  const handleCloseAlert = (event, reason) => {
+    
+    if (reason === "clickaway") {
+      return;
+    }
+    
+    setOpen(false);
+    navigate("/connexion", { replace: true });
   };
 
   return (
@@ -313,6 +336,11 @@ export default function Inscription() {
           </Box>
         </Container>
       </ThemeProvider>
+      <Snackbar open={open} autoHideDuration={2000} onClose={handleCloseAlert}>
+        <Alert onClose={handleCloseAlert} severity="success" sx={{ width: "100%" }}>
+           Vous êtes enregistré!
+        </Alert>
+      </Snackbar>
     </div>
   );
 }

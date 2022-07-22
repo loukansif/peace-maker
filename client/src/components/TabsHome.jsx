@@ -7,6 +7,12 @@ import TabPanel from "@mui/lab/TabPanel";
 import Paper from "@mui/material/Paper";
 import Avatar from "@mui/material/Avatar";
 import Typography from "@mui/material/Typography";
+import Snackbar from "@mui/material/Snackbar";
+import MuiAlert from "@mui/material/Alert";
+
+const Alert = React.forwardRef(function Alert(props, ref) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
 
 export default function TabsHome() {
   const [currentHaiku, setCurrentHaiku] = useState(null);
@@ -75,13 +81,29 @@ export default function TabsHome() {
       body: JSON.stringify({ reactionss: currentHaiku.reactionss }),
     })
       .then(() => {
-        alert("Vote enregistré");
+        handleClickAlert()
       })
       .catch((error) => {
         window.alert(error);
         return;
       });
   };
+
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickAlert = () => {
+    setOpen(true);
+  };
+
+  const handleCloseAlert = (event, reason) => {
+    
+    if (reason === "clickaway") {
+      return;
+    }
+    
+    setOpen(false);
+  };
+
 
   useEffect(() => {
     getHaikus();
@@ -96,33 +118,41 @@ export default function TabsHome() {
           justifyContent="center"
           width="100%"
           position="fixed"
-          top="6%"
+          top="8%"
           className="blur"
         >
-          <TabList onChange={handleChange} aria-label="lab API tabs example">
+          <TabList
+            onChange={handleChange}
+            aria-label="lab API tabs example"
+            style={{ top: 60, left: 0, marginTop: 18 }}
+            TabIndicatorProps={{ style: { backgroundColor: "white"} }}
+          >
             <Tab
-              label="New"
+              style={{ textTransform: "none", fontSize: 18 }}
+              label="new"
               value="1"
               sx={{ color: "whitesmoke !important" }}
             />
             <Tab
-              label="Top"
+              style={{ textTransform: "none", fontSize: 18 }}
+              label="top"
               value="2"
               sx={{ color: "whitesmoke !important" }}
             />
             <Tab
-              label="Flow"
+              style={{ textTransform: "none", fontSize: 18 }}
+              label="flow"
               value="3"
               sx={{ color: "whitesmoke !important" }}
             />
           </TabList>
         </Box>
-        <TabPanel value="1">
+        <TabPanel value="1" style={{ top: 60, left: 0, marginLeft: 10 }}>
           {currentHaiku && (
             <div className="emojisSelect">
               {reactionsImg.map((i, index) => {
                 return (
-                  <span className="emojiContainer">
+                  <span className="emojiContainer" key={index}>
                     <img
                       src={reactionsImg[index]}
                       className="emojisSelectItem"
@@ -159,21 +189,24 @@ export default function TabsHome() {
                         color: "whitesmoke",
                         width: "90%",
                         marginBottom: 4,
+                        borderRadius: "25px",
                       }}
                     >
-                      <a  href={"/profil/" + haiku.user._id}>
-                      <Avatar
-                        key={haiku.user._id}
-                        className="totemPosition"
-                        sx={{ width: 70, height: 70 }}
-                        src={haiku.user.totem}
-                      />
+                      <a href={"/profil/" + haiku.user._id}>
+                        <Avatar
+                          key={haiku.user._id}
+                          className="totemPosition"
+                          sx={{ width: 70, height: 70 }}
+                          src={haiku.user.totem}
+                        />
                       </a>
-                      <Typography sx={{ marginTop: -5 }}>
-                        {haiku.line1}
-                      </Typography>
-                      <Typography>{haiku.line2}</Typography>
-                      <Typography>{haiku.line3}</Typography>
+                      <div className="textHaiku">
+                        <Typography sx={{ marginTop: -9 }}>
+                          {haiku.line1}
+                        </Typography>
+                        <Typography>{haiku.line2}</Typography>
+                        <Typography>{haiku.line3}</Typography>
+                      </div>
 
                       <Avatar
                         className="emojiPosition"
@@ -186,10 +219,18 @@ export default function TabsHome() {
               );
             })}
           </div>
+          <div className="tabEmptySpace">
+            <p className="loadMoreHaikusIcone"> load more </p>
+          </div>
         </TabPanel>
         <TabPanel value="2">Item Two</TabPanel>
         <TabPanel value="3">Item Three</TabPanel>
       </TabContext>
+      <Snackbar open={open} autoHideDuration={2000} onClose={handleCloseAlert}>
+        <Alert onClose={handleCloseAlert} severity="success" sx={{ width: "100%" }}>
+           Vote enregistré!
+        </Alert>
+      </Snackbar>
     </Box>
   );
 }

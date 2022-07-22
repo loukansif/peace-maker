@@ -1,6 +1,6 @@
-
 import { Link } from "@mui/material";
 import React from "react";
+import "../FooterButtons.scss";
 
 import NewHaikuButtonIcone from '../assets/icones/newHaikuButton.png'
 
