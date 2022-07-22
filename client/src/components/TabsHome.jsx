@@ -16,6 +16,7 @@ const Alert = React.forwardRef(function Alert(props, ref) {
 
 export default function TabsHome() {
   const [currentHaiku, setCurrentHaiku] = useState(null);
+  
   let imgEmoji = "";
 
   let reactionsImg = [
@@ -38,6 +39,7 @@ export default function TabsHome() {
 
   const [value, setValue] = useState("1");
   const [haikus, setHaikus] = useState([]);
+  const [haikusByVote, setHaikusByVote] = useState([]);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -56,12 +58,26 @@ export default function TabsHome() {
       .catch((error) => console.log(error));
   };
 
+  // récupérations des Haikus triés par top vote
+
+  const getHaikusByVote = () => {
+    fetch("http://localhost:5000/haikus/top")
+      .then((response) => {
+        return response.json();
+      })
+      .then((result) => {
+        setHaikusByVote(result);
+      })
+      .catch((error) => console.log(error));
+  };
+
   const emojisFunction = (haiku) => {
     setCurrentHaiku(haiku);
   };
 
   const updateVote = (index) => {
     currentHaiku.reactionss[index]++;
+    currentHaiku.totalVote++;
     updateReactions();
     closeVote();
   };
@@ -78,7 +94,7 @@ export default function TabsHome() {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ reactionss: currentHaiku.reactionss }),
+      body: JSON.stringify({ reactionss: currentHaiku.reactionss, totalVote: currentHaiku.totalVote }),
     })
       .then(() => {
         handleClickAlert()
@@ -107,6 +123,7 @@ export default function TabsHome() {
 
   useEffect(() => {
     getHaikus();
+    getHaikusByVote();
   }, [currentHaiku]);
 
   return (
@@ -223,7 +240,82 @@ export default function TabsHome() {
             <p className="loadMoreHaikusIcone"> load more </p>
           </div>
         </TabPanel>
-        <TabPanel value="2">Item Two</TabPanel>
+        <TabPanel value="2">
+        {currentHaiku && (
+            <div className="emojisSelect">
+              {reactionsImg.map((i, index) => {
+                return (
+                  <span className="emojiContainer" key={index}>
+                    <img
+                      src={reactionsImg[index]}
+                      className="emojisSelectItem"
+                      alt=""
+                      onClick={() => updateVote(index)}
+                    />
+                    <span>{currentHaiku.reactionss[index]}</span>
+                  </span>
+                );
+              })}
+            </div>
+          )}
+
+          <div className="haikus">
+            {haikusByVote.map((haiku) => {
+              let nbReaction = 0;
+              for (let i = 0; i < haiku.reactionss.length; i++) {
+                if (haiku.reactionss[i] > nbReaction) {
+                  nbReaction = haiku.reactionss[i];
+                  imgEmoji = reactionsImg[i];
+                }
+              }
+              return (
+                <div key={haiku._id}>
+                  <div
+                    className={currentHaiku ? "haikuDisplay" : ""}
+                    onClick={closeVote}
+                  >
+                    <Paper
+                      elevation={8}
+                      sx={{
+                        padding: 2,
+                        backgroundColor: "rgba(255,255,255,0)",
+                        color: "whitesmoke",
+                        width: "90%",
+                        marginBottom: 4,
+                        borderRadius: "25px",
+                      }}
+                    >
+                      <a href={"/profil/" + haiku.user._id}>
+                        <Avatar
+                          key={haiku.user._id}
+                          className="totemPosition"
+                          sx={{ width: 70, height: 70 }}
+                          src={haiku.user.totem}
+                        />
+                      </a>
+                      <div className="textHaiku">
+                        <Typography sx={{ marginTop: -9 }}>
+                          {haiku.line1}
+                        </Typography>
+                        <Typography>{haiku.line2}</Typography>
+                        <Typography>{haiku.line3}</Typography>
+                      </div>
+
+                      <Avatar
+                        className="emojiPosition"
+                        src={imgEmoji}
+                        onClick={() => emojisFunction(haiku)}
+                      />
+                    </Paper>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+          <div className="tabEmptySpace">
+            <p className="loadMoreHaikusIcone"> load more </p>
+          </div>
+        </TabPanel>
         <TabPanel value="3">Item Three</TabPanel>
       </TabContext>
       <Snackbar open={open} autoHideDuration={2000} onClose={handleCloseAlert}>

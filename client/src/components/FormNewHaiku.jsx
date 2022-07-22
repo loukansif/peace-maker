@@ -311,7 +311,7 @@ export default function FormNewHaiku() {
                     className="emojisSelectItem"
                     alt=""
                     onClick={() => {
-                      updateForm({ reactionss: reactionSelect });
+                      updateForm({ reactionss: reactionSelect, totalVote: 1 });
                       handleClose();
                     }}
                   />

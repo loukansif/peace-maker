@@ -6,7 +6,8 @@ const haikuSchema = new mongoose.Schema({
   line3: String,
   createdAt: String,
   reactionss: Array,
-  user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' }
+  user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+  totalVote: Number
 })
 
 const Haikus = mongoose.model('Haikus', haikuSchema);
