@@ -7,6 +7,12 @@ import TabPanel from "@mui/lab/TabPanel";
 import Paper from "@mui/material/Paper";
 import Avatar from "@mui/material/Avatar";
 import Typography from "@mui/material/Typography";
+import Snackbar from "@mui/material/Snackbar";
+import MuiAlert from "@mui/material/Alert";
+
+const Alert = React.forwardRef(function Alert(props, ref) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
 
 export default function TabsHome() {
   const [currentHaiku, setCurrentHaiku] = useState(null);
@@ -75,13 +81,29 @@ export default function TabsHome() {
       body: JSON.stringify({ reactionss: currentHaiku.reactionss }),
     })
       .then(() => {
-        alert("Vote enregistré");
+        handleClickAlert()
       })
       .catch((error) => {
         window.alert(error);
         return;
       });
   };
+
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickAlert = () => {
+    setOpen(true);
+  };
+
+  const handleCloseAlert = (event, reason) => {
+    
+    if (reason === "clickaway") {
+      return;
+    }
+    
+    setOpen(false);
+  };
+
 
   useEffect(() => {
     getHaikus();
@@ -122,7 +144,7 @@ export default function TabsHome() {
             <div className="emojisSelect">
               {reactionsImg.map((i, index) => {
                 return (
-                  <span className="emojiContainer">
+                  <span className="emojiContainer" key={index}>
                     <img
                       src={reactionsImg[index]}
                       className="emojisSelectItem"
@@ -190,6 +212,11 @@ export default function TabsHome() {
         <TabPanel value="2">Item Two</TabPanel>
         <TabPanel value="3">Item Three</TabPanel>
       </TabContext>
+      <Snackbar open={open} autoHideDuration={2000} onClose={handleCloseAlert}>
+        <Alert onClose={handleCloseAlert} severity="success" sx={{ width: "100%" }}>
+           Vote enregistré!
+        </Alert>
+      </Snackbar>
     </Box>
   );
 }

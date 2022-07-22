@@ -7,7 +7,7 @@ import Paper from "@mui/material/Paper";
 import Avatar from "@mui/material/Avatar";
 import Typography from "@mui/material/Typography";
 
-export default function TabsProfil() {
+export default function TabsFilter() {
   const { userId } = useParams();
   let imgEmoji = "";
   const [currentHaiku, setCurrentHaiku] = useState(null);
@@ -76,13 +76,12 @@ export default function TabsProfil() {
                         width: "90%",
                         marginBottom: 4,
                       }}
-                    >
+                    >                      
                       <Avatar
                         className="totemPosition"
                         sx={{ width: 70, height: 70 }}
                         src={haiku.user.totem}
                       />
-
                       <Typography sx={{ marginTop: -5 }}>
                         {haiku.line1}
                       </Typography>

@@ -21,7 +21,7 @@ routerUser.get('/user/:id', async (req, res) => {
 
 routerUser.post('/', async (req, res) => {
     const newUser = await createUser(req.body)
-    res.send('nouveau user créé')
+    res.send(newUser)
 })
 
 

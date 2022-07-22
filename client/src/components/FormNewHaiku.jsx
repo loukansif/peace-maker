@@ -6,11 +6,17 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
-import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
-import FormData from 'form-data'
-import axios from 'axios'
+import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
+import FormData from "form-data";
+import axios from "axios";
 import "../formHaiku.scss";
 import mongoose from "mongoose";
+import Snackbar from "@mui/material/Snackbar";
+import MuiAlert from "@mui/material/Alert";
+
+const Alert = React.forwardRef(function Alert(props, ref) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
 
 export default function FormNewHaiku() {
   let reactionsImg = [
@@ -45,42 +51,42 @@ export default function FormNewHaiku() {
     line2: "",
     line3: "",
     createdAt: "",
-    reactionss: [0,0,1,0,0,0,0,0,0,0,0,0,0,0,0],
+    reactionss: [0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
   });
 
   // modération /////////////////////////////////////////
-function sightEngine() {
+  function sightEngine() {
+    let data = new FormData();
+    data.append("text", form.line1 + form.line2 + form.line3);
+    data.append("lang", "fr");
+    data.append("mode", "standard");
+    data.append("api_user", "323671425");
+    data.append("api_secret", "vGeWd6t4TaMFxVYL5JtB");
 
-let data = new FormData();
-data.append('text', form.line1 + form.line2 + form.line3);
-data.append('lang', 'fr');
-data.append('mode', 'standard');
-data.append('api_user', '323671425');
-data.append('api_secret', 'vGeWd6t4TaMFxVYL5JtB');
-
-// fetch sightEngine
-axios({
-  url: 'https://api.sightengine.com/1.0/text/check.json',
-  method:'post',
-  data: data,
-  headers: data.getHeaders ? data.getHeaders() : { 'Content-Type': 'multipart/form-data' }
-})
-.then(function (response) {
-  // on success: handle response
-  console.log(response.data.profanity.matches.length);
-  if(response.data.profanity.matches.length !== 0) {
-    alert('pas de gros mots')
-    window.location.reload();
+    // fetch sightEngine
+    axios({
+      url: "https://api.sightengine.com/1.0/text/check.json",
+      method: "post",
+      data: data,
+      headers: data.getHeaders
+        ? data.getHeaders()
+        : { "Content-Type": "multipart/form-data" },
+    })
+      .then(function (response) {
+        // on success: handle response
+        console.log(response.data.profanity.matches.length);
+        if (response.data.profanity.matches.length !== 0) {
+          handleClickAlert();
+        }
+      })
+      .catch(function (error) {
+        // handle error
+        if (error.response) console.log(error.response.data);
+        else console.log(error.message);
+      });
   }
-})
-.catch(function (error) {
-  // handle error
-  if (error.response) console.log(error.response.data);
-  else console.log(error.message);
-});
-}
 
-// fin modération /////////////////////////////
+  // fin modération /////////////////////////////
 
   function updateForm(value) {
     console.log(value);
@@ -105,8 +111,7 @@ axios({
       body: JSON.stringify(newHaiku),
     })
       .then(() => {
-        alert("haiku enregistré");
-        console.log(newHaiku);
+        handleClickAlertCreate()
       })
       .catch((error) => {
         alert(error);
@@ -115,7 +120,40 @@ axios({
   };
 
   const handleClose = () => {
-    setEmojisList(!emojisList)
+    setEmojisList(!emojisList);
+  };
+
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickAlert = () => {
+    setOpen(true);
+  };
+
+  const handleCloseAlert = (event, reason) => {
+    
+    if (reason === "clickaway") {
+      return;
+    }
+    
+    setOpen(false);
+    window.location.reload();
+  };
+
+
+  const [openCreate, setOpenCreate] = React.useState(false);
+
+  const handleClickAlertCreate = () => {
+    setOpenCreate(true);
+  };
+
+  const handleCloseAlertCreate = (event, reason) => {
+    
+    if (reason === "clickaway") {
+      return;
+    }
+    
+    setOpenCreate(false);    
+    navigate("/");
   };
 
   return (
@@ -140,7 +178,6 @@ axios({
               sx={{ border: "solid 1px whitesmoke", borderRadius: "15px" }}
               onClick={() => {
                 postNewHaiku();
-                navigate("/");
               }}
             >
               partager
@@ -240,46 +277,56 @@ axios({
         </Box>
 
         {/* ////////////////////////////  Slider pour selectionner l'emoji du mood   ///////////////////// */}
-        <Button
-              sx={{ display: "block", minWidth: 100 }}
+        <Button sx={{ display: "block", minWidth: 100 }}>
+          <div className="selectEmojiTitle">
+            <span
+              onClick={() => {
+                handleClose();
+              }}
             >
-              <div className="selectEmojiTitle">
-                <span onClick={() => {handleClose()}}> choisir son mood </span>
-              </div>
-              <div>
-                  <img src={reactionsImg[form.reactionss.indexOf(1)]} alt="" className="totemSelected" onClick={() => {handleClose()}}/>
-                </div>
-            </Button>
-            {emojisList && (
-              <div className="emojisSelect">
-                {reactionsImg.map((i, index) => {
-                  let reactionSelect = Array.from({ length: 15 }, (x) => 0);
-                  reactionSelect[index]++;
-                  return (
-                    <span className="emojiContainer" key={index}>
-                      <img
-                        src={reactionsImg[index]}
-                        className="emojisSelectItem"
-                        alt=""
-                        onClick={() => {
-                          updateForm({ reactionss: reactionSelect });
-                          handleClose();
-                        }}
-                      />
-                    </span>
-                  );
-                })}
-              </div>
-            )}
+              {" "}
+              choisir son mood{" "}
+            </span>
+          </div>
+          <div>
+            <img
+              src={reactionsImg[form.reactionss.indexOf(1)]}
+              alt=""
+              className="totemSelected"
+              onClick={() => {
+                handleClose();
+              }}
+            />
+          </div>
+        </Button>
+        {emojisList && (
+          <div className="emojisSelect">
+            {reactionsImg.map((i, index) => {
+              let reactionSelect = Array.from({ length: 15 }, (x) => 0);
+              reactionSelect[index]++;
+              return (
+                <span className="emojiContainer" key={index}>
+                  <img
+                    src={reactionsImg[index]}
+                    className="emojisSelectItem"
+                    alt=""
+                    onClick={() => {
+                      updateForm({ reactionss: reactionSelect });
+                      handleClose();
+                    }}
+                  />
+                </span>
+              );
+            })}
+          </div>
+        )}
         <Box
           component="form"
           display="flex"
           justifyContent="center"
           alignItems="center"
           sx={{ width: "100%", mt: 2 }}
-        >
-         
-        </Box>
+        ></Box>
 
         {/* //////////////////////////////// Texte Règles écriture d'un Haiku //////////////////////////// */}
         <div className="ReglesHaiku">
@@ -290,7 +337,16 @@ axios({
           </ul>
         </div>
       </div>
+      <Snackbar open={open} autoHideDuration={2000} onClose={handleCloseAlert}>
+        <Alert onClose={handleCloseAlert} severity="warning" sx={{ width: "100%" }}>
+          Pas de gros mots!
+        </Alert>
+      </Snackbar>
+      <Snackbar open={openCreate} autoHideDuration={2000} onClose={handleCloseAlertCreate}>
+        <Alert onClose={handleCloseAlertCreate} severity="success" sx={{ width: "100%" }}>
+          Haiku enregistré!
+        </Alert>
+      </Snackbar>
     </>
   );
 }
-
