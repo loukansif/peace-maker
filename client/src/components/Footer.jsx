@@ -2,7 +2,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
 import Copyright from "./Copyright";
-import img from "../assets/img/logo_haiku.png";
+import img from "../assets/img/logo_haikuZ.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFacebook } from "@fortawesome/free-brands-svg-icons";
 import { faTwitter } from "@fortawesome/free-brands-svg-icons";
