@@ -5,7 +5,7 @@ import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
-import img from "../assets/img/logo_haiku.png";
+import img from "../assets/img/logo_haikuZ.png";
 
 export default function ButtonAppBar() {
   return (
