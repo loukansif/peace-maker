@@ -42,6 +42,7 @@ body {
   backdrop-filter: blur(10px);
 }
 
+
 @media (max-width: 880px) {
   .title {
     text-align: center;
@@ -60,6 +61,16 @@ body {
   backdrop-filter: blur(10px);
   z-index: 999;
 }
+
+.blurBackgroundProfil {
+  position: fixed;
+  top: 0;
+  height: 80px;
+  width: 100%;
+  backdrop-filter: blur(10px);
+  z-index: 0;
+}
+
 .logoHaiku {
   margin-top: 8px;
   margin-left: 20px;

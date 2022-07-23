@@ -14,8 +14,8 @@ export default function Profil() {
 
     return (
         <>
-              <div className="blurBackground"> </div>
-            <Box sx={{ flexGrow: 1 }} mb={-8}>
+              <div className="blurBackgroundProfil"> </div>
+            <Box sx={{ flexGrow: 1 }} mb={-2}>
                 <AppBar
                     sx={{
                         position: "fixed",
@@ -25,8 +25,9 @@ export default function Profil() {
                     }}
                     elevation={0}
                 >
+                    <div >
                     <Toolbar >
-                        <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+                        <Typography variant="h6" component="div" sx={{ flexGrow: 1 }} >
                             <ArrowBackIosNewIcon onClick={() => navigate(-1)} />
                         </Typography>
                         <a href="/parametres">
@@ -41,6 +42,7 @@ export default function Profil() {
                             </a>
                         </div>
                     </Toolbar>
+                    </div>
                 </AppBar>
             </Box>
 
