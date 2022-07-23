@@ -111,7 +111,7 @@ export default function FormNewHaiku() {
       body: JSON.stringify(newHaiku),
     })
       .then(() => {
-        handleClickAlertCreate()
+        handleClickAlertCreate();
       })
       .catch((error) => {
         alert(error);
@@ -130,15 +130,13 @@ export default function FormNewHaiku() {
   };
 
   const handleCloseAlert = (event, reason) => {
-    
     if (reason === "clickaway") {
       return;
     }
-    
+
     setOpen(false);
     window.location.reload();
   };
-
 
   const [openCreate, setOpenCreate] = React.useState(false);
 
@@ -147,12 +145,11 @@ export default function FormNewHaiku() {
   };
 
   const handleCloseAlertCreate = (event, reason) => {
-    
     if (reason === "clickaway") {
       return;
     }
-    
-    setOpenCreate(false);    
+
+    setOpenCreate(false);
     navigate("/");
   };
 
@@ -169,20 +166,25 @@ export default function FormNewHaiku() {
           }}
           elevation={0}
         >
-          <Toolbar>
-            <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-              <ArrowBackIosNewIcon onClick={() => navigate(-1)} />
-            </Typography>
-            <Button
-              color="inherit"
-              sx={{ border: "solid 1px whitesmoke", borderRadius: "15px" }}
-              onClick={() => {
-                postNewHaiku();
-              }}
-            >
-              partager
-            </Button>
-          </Toolbar>
+          <div className="navProfil">
+            <Toolbar>
+              <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+                <ArrowBackIosNewIcon onClick={() => navigate(-1)} />
+              </Typography>
+              <Button
+                              className="btnFollow"
+
+                color="inherit"
+                style={{ textTransform: "none" }}
+                sx={{ border: "solid 1px whitesmoke", borderRadius: "18px", pl:2, pr:2 }}
+                onClick={() => {
+                  postNewHaiku();
+                }}
+              >
+                partager
+              </Button>
+            </Toolbar>
+          </div>
         </AppBar>
       </Box>
 
@@ -205,12 +207,15 @@ export default function FormNewHaiku() {
                 variant="h8"
                 component="h5"
                 justify="flex-start"
+                sx={{ color: "whitesmoke", marginBottom: 2 }}
               >
                 nouvel Haïku
               </Typography>
               <div className="newHaikuLine">
                 <TextField
-                  inputProps={{ maxLength: 30 }}
+                isRequired="true"
+                 sx={{ input: { color: 'white' } }}
+                  inputProps={{ maxLength: 30  }}
                   style={{ width: "100%" }}
                   id="standard-basic"
                   variant="standard"
@@ -226,6 +231,7 @@ export default function FormNewHaiku() {
               </div>
               <div className="newHaikuLine">
                 <TextField
+                sx={{ input: { color: 'white' } }}
                   inputProps={{ maxLength: 30 }}
                   style={{ width: "100%" }}
                   id="standard-basic"
@@ -239,6 +245,7 @@ export default function FormNewHaiku() {
               </div>
               <div className="newHaikuLine">
                 <TextField
+                                 sx={{ input: { color: 'white' } }}
                   inputProps={{ maxLength: 30 }}
                   style={{ width: "100%" }}
                   id="standard-basic"
@@ -331,19 +338,32 @@ export default function FormNewHaiku() {
         {/* //////////////////////////////// Texte Règles écriture d'un Haiku //////////////////////////// */}
         <div className="ReglesHaiku">
           <ul>
-            <h5>les règles du Haiku:</h5>
+            <h5>les règles d'un Haiku:</h5>
             <li> 3 lignes </li>
             <li> 30 caractères par ligne </li>
+            <li> laisser libre court à son imagination </li>
           </ul>
         </div>
       </div>
       <Snackbar open={open} autoHideDuration={2000} onClose={handleCloseAlert}>
-        <Alert onClose={handleCloseAlert} severity="warning" sx={{ width: "100%" }}>
+        <Alert
+          onClose={handleCloseAlert}
+          severity="warning"
+          sx={{ width: "100%" }}
+        >
           Pas de gros mots!
         </Alert>
       </Snackbar>
-      <Snackbar open={openCreate} autoHideDuration={2000} onClose={handleCloseAlertCreate}>
-        <Alert onClose={handleCloseAlertCreate} severity="success" sx={{ width: "100%" }}>
+      <Snackbar
+        open={openCreate}
+        autoHideDuration={2000}
+        onClose={handleCloseAlertCreate}
+      >
+        <Alert
+          onClose={handleCloseAlertCreate}
+          severity="success"
+          sx={{ width: "100%" }}
+        >
           Haiku enregistré!
         </Alert>
       </Snackbar>

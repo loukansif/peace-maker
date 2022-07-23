@@ -76,7 +76,7 @@ body {
 }
 
 .logoHaiku {
-  margin-top: 8px;
+  margin-top: -8px;
   margin-left: -20px;
   width: 210px;
 }
@@ -125,11 +125,12 @@ body {
 .navUserImg {
   width: 40px;
   max-height: 30px;
-  margin-top: 4px;
+  padding-top: 4px;
 }
 .navUserImgLink {
 height: 0
 ;}
+
 .navUserTotem {
   border: 1px solid white;
   border-radius: 25px;
