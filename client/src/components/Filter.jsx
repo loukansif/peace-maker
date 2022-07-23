@@ -120,6 +120,8 @@ export default function Filter() {
 
   return (
     <>
+     <div className="blurBackground"> </div>
+     
       <Box sx={{ flexGrow: 1 }}>
         <AppBar
           sx={{
@@ -129,6 +131,7 @@ export default function Filter() {
           }}
           elevation={0}
         >
+        <div className="navProfil" >
           <Toolbar>
             <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
               <ArrowBackIosNewIcon onClick={() => navigate(-1)} />
@@ -142,26 +145,29 @@ export default function Filter() {
               <Button
                 className="btnFollow"
                 color="inherit"
-                sx={{ border: "solid 1px whitesmoke", borderRadius: "15px" }}
+                style={{ textTransform: "none" }}
+                sx={{ border: "solid 1px whitesmoke", borderRadius: "18px" }}
                 onClick={() => {
                   followUser();
                 }}
               >
-                Suivre
+                suivre
               </Button>
             ) : (
               <Button
                 className="btnFollow"
                 color="inherit"
-                sx={{ border: "solid 1px whitesmoke", borderRadius: "15px" }}
+                style={{ textTransform: "none" }}
+                sx={{ border: "solid 1px whitesmoke", borderRadius: "18px" }}
                 onClick={() => {
                   unfollowUser();
                 }}
               >
-                Désabonner
+                désabonner
               </Button>
             )}
           </Toolbar>
+          </div>
         </AppBar>
       </Box>
       <div className="main">
