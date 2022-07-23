@@ -56,6 +56,8 @@ export default function TabsProfil() {
     getHaikus();
   }, []);
   return (
+    <>
+    <div className="blurBackground"> </div>
     <Box sx={{ dp: 2, width: "100%", typography: "body1" }} className="margTop">
       <TabContext value={value}>
         <Box
@@ -67,21 +69,28 @@ export default function TabsProfil() {
           top="6%"
           className="blur"
         >
-          <TabList onChange={handleChange} aria-label="lab API tabs example">
+          <TabList
+            onChange={handleChange}
+            aria-label="lab API tabs example"
+            style={{ top: 60, left: 0, marginTop: 26 }}
+            TabIndicatorProps={{ style: { backgroundColor: "white" } }}
+          >
             <Tab
-              label="Haïkus"
+            style={{ textTransform: "none", fontSize: 18 }}
+              label="haïkus"
               value="1"
               sx={{ color: "whitesmoke !important" }}
             />
             <Tab
-              label="Favoris"
+            style={{ textTransform: "none", fontSize: 18 }}
+              label="favoris"
               value="2"
               sx={{ color: "whitesmoke !important" }}
             />
           </TabList>
         </Box>
 
-        <TabPanel value="1">
+        <TabPanel value="1" style={{ top: 90, left: 0, marginLeft: 10, marginTop:20 }}>
           <div className="haikus">
             {haikus.map((haiku) => {
               let nbReaction = 0;
@@ -92,38 +101,40 @@ export default function TabsProfil() {
                 }
               }
               return localStorage.getItem("userId") === haiku.user._id ? (
-                  <div key={haiku._id}>
-                    <div className={currentHaiku ? "haikuDisplay" : ""}>
-                      <Paper
-                        elevation={8}
-                        sx={{
-                          padding: 2,
-                          backgroundColor: "rgba(255,255,255,0)",
-                          color: "whitesmoke",
-                          width: "90%",
-                          marginBottom: 4,
-                        }}
-                      >
-                        <Avatar
-                          className="totemPosition"
-                          sx={{ width: 70, height: 70 }}
-                          src={haiku.user.totem}
-                        />
+                <div key={haiku._id}>
+                  <div className={currentHaiku ? "haikuDisplay" : ""}>
+                    <Paper
+                      elevation={8}
+                      sx={{
+                        padding: 2,
+                        backgroundColor: "rgba(255,255,255,0)",
+                        color: "whitesmoke",
+                        width: "90%",
+                        marginBottom: 4,
+                        borderRadius: "25px"
+                      }}
+                    >
+                      <Avatar
+                        className="totemPosition"
+                        sx={{ width: 70, height: 70 }}
+                        src={haiku.user.totem}
+                      />
+                       <div className="textHaiku">
+                      <Typography sx={{ marginTop: -9 }}>
+                        {haiku.line1}
+                      </Typography>
+                      <Typography>{haiku.line2}</Typography>
+                      <Typography>{haiku.line3}</Typography>
+                       </div>
 
-                        <Typography sx={{ marginTop: -5 }}>
-                          {haiku.line1}
-                        </Typography>
-                        <Typography>{haiku.line2}</Typography>
-                        <Typography>{haiku.line3}</Typography>
-
-                        <Avatar
-                          className="emojiPosition"
-                          src={imgEmoji}
-                          onClick={() => emojisFunction(haiku)}
-                        />
-                      </Paper>
-                    </div>
+                      <Avatar
+                        className="emojiPosition"
+                        src={imgEmoji}
+                        onClick={() => emojisFunction(haiku)}
+                      />
+                    </Paper>
                   </div>
+                </div>
               ) : null;
             })}
           </div>
@@ -132,5 +143,6 @@ export default function TabsProfil() {
         <TabPanel value="2">My favoris</TabPanel>
       </TabContext>
     </Box>
+    </>
   );
 }

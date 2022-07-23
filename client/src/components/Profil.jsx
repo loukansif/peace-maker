@@ -25,7 +25,7 @@ export default function Profil() {
                     }}
                     elevation={0}
                 >
-                    <div >
+                    <div className="navProfil" >
                     <Toolbar >
                         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }} >
                             <ArrowBackIosNewIcon onClick={() => navigate(-1)} />
