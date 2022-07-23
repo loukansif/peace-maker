@@ -220,8 +220,8 @@ export default function FormNewHaiku() {
                       createdAt: new Date(),
                     });
                     sethaiku_Line_1_Length(30 - e.target.value.length);
-                    sightEngine();
                   }}
+                  onBlur={sightEngine}
                 />
               </div>
               <div className="newHaikuLine">
@@ -233,8 +233,8 @@ export default function FormNewHaiku() {
                   onChange={(e) => {
                     updateForm({ line2: e.target.value });
                     sethaiku_Line_2_Length(30 - e.target.value.length);
-                    sightEngine();
                   }}
+                  onBlur={sightEngine}
                 />
               </div>
               <div className="newHaikuLine">
@@ -246,8 +246,8 @@ export default function FormNewHaiku() {
                   onChange={(e) => {
                     updateForm({ line3: e.target.value });
                     sethaiku_Line_3_Length(30 - e.target.value.length);
-                    sightEngine();
                   }}
+                  onBlur={sightEngine}
                 />
               </div>
             </div>
