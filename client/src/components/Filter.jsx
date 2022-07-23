@@ -115,7 +115,9 @@ export default function Filter() {
 
   useEffect(() => {
     getUserById();
-    getConnectUserById();
+    if(localStorage.getItem("userIsLogged")){
+      getConnectUserById()
+    } 
   });
 
   return (
@@ -133,12 +135,13 @@ export default function Filter() {
             <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
               <ArrowBackIosNewIcon onClick={() => navigate(-1)} />
             </Typography>
-            <div className="navUserTotem">
+            {/* <div className="navUserTotem">
               <a href="/profil">
                 <img src={totem} alt="" className="navUserImg" />
               </a>
-            </div>
-            {!followingArray.includes(userId) ? (
+            </div> */}
+            {localStorage.getItem("userIsLogged")?
+            (!followingArray.includes(userId) ? (
               <Button
                 className="btnFollow"
                 color="inherit"
@@ -160,7 +163,8 @@ export default function Filter() {
               >
                 Désabonner
               </Button>
-            )}
+            )):null
+            }
           </Toolbar>
         </AppBar>
       </Box>

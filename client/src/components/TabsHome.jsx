@@ -15,8 +15,9 @@ const Alert = React.forwardRef(function Alert(props, ref) {
 });
 
 export default function TabsHome() {
+  const [userFollowing, setUserFollowing] = useState([]);
   const [currentHaiku, setCurrentHaiku] = useState(null);
-  
+
   let imgEmoji = "";
 
   let reactionsImg = [
@@ -94,14 +95,25 @@ export default function TabsHome() {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ reactionss: currentHaiku.reactionss, totalVote: currentHaiku.totalVote }),
+      body: JSON.stringify({
+        reactionss: currentHaiku.reactionss,
+        totalVote: currentHaiku.totalVote,
+      }),
     })
       .then(() => {
-        handleClickAlert()
+        handleClickAlert();
       })
       .catch((error) => {
         window.alert(error);
         return;
+      });
+  };
+
+  const getConnectUserById = () => {
+    fetch(`http://localhost:5000/users/user/${localStorage.getItem("userId")}`)
+      .then((resp) => resp.json())
+      .then((res) => {
+        setUserFollowing(res.following);
       });
   };
 
@@ -112,14 +124,12 @@ export default function TabsHome() {
   };
 
   const handleCloseAlert = (event, reason) => {
-    
     if (reason === "clickaway") {
       return;
     }
-    
+
     setOpen(false);
   };
-
 
   useEffect(() => {
     getHaikus();
@@ -142,7 +152,7 @@ export default function TabsHome() {
             onChange={handleChange}
             aria-label="lab API tabs example"
             style={{ top: 60, left: 0, marginTop: 18 }}
-            TabIndicatorProps={{ style: { backgroundColor: "white"} }}
+            TabIndicatorProps={{ style: { backgroundColor: "white" } }}
           >
             <Tab
               style={{ textTransform: "none", fontSize: 18 }}
@@ -240,8 +250,8 @@ export default function TabsHome() {
             <p className="loadMoreHaikusIcone"> load more </p>
           </div>
         </TabPanel>
-        <TabPanel value="2">
-        {currentHaiku && (
+        <TabPanel value="2" style={{ top: 60, left: 0, marginLeft: 10 }}>
+          {currentHaiku && (
             <div className="emojisSelect">
               {reactionsImg.map((i, index) => {
                 return (
@@ -316,11 +326,96 @@ export default function TabsHome() {
             <p className="loadMoreHaikusIcone"> load more </p>
           </div>
         </TabPanel>
-        <TabPanel value="3">Item Three</TabPanel>
+        <TabPanel value="3" style={{ top: 60, left: 0, marginLeft: 10 }}>
+          {localStorage.getItem("userIsLogged")
+            ? (getConnectUserById(),
+              userFollowing.length > 0 ? (
+                <>
+                  {currentHaiku && (
+                    <div className="emojisSelect">
+                      {reactionsImg.map((i, index) => {
+                        return (
+                          <span className="emojiContainer" key={index}>
+                            <img
+                              src={reactionsImg[index]}
+                              className="emojisSelectItem"
+                              alt=""
+                              onClick={() => updateVote(index)}
+                            />
+                            <span>{currentHaiku.reactionss[index]}</span>
+                          </span>
+                        );
+                      })}
+                    </div>
+                  )}
+
+                  <div className="haikus">
+                    {haikus.map((haiku) => {
+                      let nbReaction = 0;
+                      for (let i = 0; i < haiku.reactionss.length; i++) {
+                        if (haiku.reactionss[i] > nbReaction) {
+                          nbReaction = haiku.reactionss[i];
+                          imgEmoji = reactionsImg[i];
+                        }
+                      }
+                      return userFollowing.includes(haiku.user._id) ? (
+                        <div key={haiku._id}>
+                          <div
+                            className={currentHaiku ? "haikuDisplay" : ""}
+                            onClick={closeVote}
+                          >
+                            <Paper
+                              elevation={8}
+                              sx={{
+                                padding: 2,
+                                backgroundColor: "rgba(255,255,255,0)",
+                                color: "whitesmoke",
+                                width: "90%",
+                                marginBottom: 4,
+                                borderRadius: "25px",
+                              }}
+                            >
+                              <a href={"/profil/" + haiku.user._id}>
+                                <Avatar
+                                  key={haiku.user._id}
+                                  className="totemPosition"
+                                  sx={{ width: 70, height: 70 }}
+                                  src={haiku.user.totem}
+                                />
+                              </a>
+                              <div className="textHaiku">
+                                <Typography sx={{ marginTop: -9 }}>
+                                  {haiku.line1}
+                                </Typography>
+                                <Typography>{haiku.line2}</Typography>
+                                <Typography>{haiku.line3}</Typography>
+                              </div>
+
+                              <Avatar
+                                className="emojiPosition"
+                                src={imgEmoji}
+                                onClick={() => emojisFunction(haiku)}
+                              />
+                            </Paper>
+                          </div>
+                        </div>
+                      ) : null;
+                    })}
+                  </div>
+                </>
+              ) : (
+                "Vous ne suivez aucune personne!"
+              ))
+            : "Veuillez vous identifier!"}
+        </TabPanel>
       </TabContext>
       <Snackbar open={open} autoHideDuration={2000} onClose={handleCloseAlert}>
-        <Alert onClose={handleCloseAlert} severity="success" sx={{ width: "100%" }}>
-           Vote enregistré!
+        <Alert
+          onClose={handleCloseAlert}
+          severity="success"
+          sx={{ width: "100%" }}
+        >
+          Vote enregistré!
         </Alert>
       </Snackbar>
     </Box>
