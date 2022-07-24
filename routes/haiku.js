@@ -1,5 +1,5 @@
 import express from 'express'
-import {getHaikus, getHaikusOrdered, getOneHaiku, createHaiku, updateHaiku} from '../controllers/haiku.js'
+import {getHaikus, getHaikusOrdered, getOneHaiku, createHaiku, updateHaiku, deleteOneHaiku} from '../controllers/haiku.js'
 const routerHaiku = express.Router()
 routerHaiku.use(express.json())
 routerHaiku.use(express.urlencoded({ extended: true }))
@@ -34,6 +34,11 @@ routerHaiku.post('/', async (req, res) => {
 routerHaiku.put('/:_id', async (req, res) => {
     let updateOneHaiku = await updateHaiku(req.params._id, req.body)
     res.send(updateOneHaiku)
+})
+
+routerHaiku.delete('/:id', async (req, res) => {
+    let deleteOne= await deleteOneHaiku(req.params.id)
+    res.send(deleteOne)
 })
 
 

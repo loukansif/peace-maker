@@ -87,3 +87,9 @@ export async function updateHaiku(_id, body) {
   return await Haikus.findOneAndUpdate({_id: _id}, {...body})
 }
 
+
+export async function deleteOneHaiku(id){
+  const myHaikuDeleted = await Haikus.deleteOne({_id:id})
+
+  return myHaikuDeleted
+}
