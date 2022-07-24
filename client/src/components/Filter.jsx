@@ -19,18 +19,18 @@ const Alert = React.forwardRef(function Alert(props, ref) {
 export default function Filter() {
   let navigate = useNavigate();
   const { userId } = useParams();
-  const [totem, setTotem] = useState("");
   const [followingArray, setFollowingArray] = useState([]);
+  // const [totem, setTotem] = useState("");
 
-  const getUserById = () => {
-    fetch(`http://localhost:5000/users/user/${userId}`)
-      .then((resp) => resp.json())
-      .then((res) => {
-        setTotem(res.totem);
-      });
-  };
+  // const getUserById = () => {
+  //   fetch(`http://localhost:5000/users/user/${userId}`)
+  //     .then((resp) => resp.json())
+  //     .then((res) => {
+  //       setTotem(res.totem);
+  //     });
+  // };
 
-  const getConnectUserById = () => {
+  const getConnectUserById = () => {    
     fetch(`http://localhost:5000/users/user/${localStorage.getItem("userId")}`)
       .then((resp) => resp.json())
       .then((res) => {
@@ -52,7 +52,8 @@ export default function Filter() {
       body: JSON.stringify(newFollowing),
     })
       .then(() => {
-        handleClickAlert()
+        handleClickAlert();
+        getConnectUserById();
       })
       .catch((error) => {
         window.alert(error);
@@ -60,9 +61,8 @@ export default function Filter() {
       });
   };
 
-
   const unfollowUser = () => {
-    followingArray.splice(followingArray.indexOf(userId),1);
+    followingArray.splice(followingArray.indexOf(userId), 1);
     let newFollowing = {
       following: followingArray,
     };
@@ -75,7 +75,8 @@ export default function Filter() {
       body: JSON.stringify(newFollowing),
     })
       .then(() => {
-        handleClickAlertDesabonne()
+        handleClickAlertDesabonne();
+        getConnectUserById();
       })
       .catch((error) => {
         window.alert(error);
@@ -90,11 +91,10 @@ export default function Filter() {
   };
 
   const handleCloseAlert = (event, reason) => {
-    
     if (reason === "clickaway") {
       return;
     }
-    
+
     setOpen(false);
   };
 
@@ -105,25 +105,23 @@ export default function Filter() {
   };
 
   const handleCloseAlertDesabonne = (event, reason) => {
-    
     if (reason === "clickaway") {
       return;
     }
-    
+
     setOpenDesabonne(false);
   };
 
   useEffect(() => {
-    getUserById();
     if(localStorage.getItem("userIsLogged")){
-      getConnectUserById()
-    } 
-  });
+      getConnectUserById();
+    }
+  },[]);
 
   return (
     <>
-     <div className="blurBackground"> </div>
-     
+      <div className="blurBackground"> </div>
+
       <Box sx={{ flexGrow: 1 }}>
         <AppBar
           sx={{
@@ -133,44 +131,50 @@ export default function Filter() {
           }}
           elevation={0}
         >
-        <div className="navProfil" >
-          <Toolbar>
-            <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-              <ArrowBackIosNewIcon onClick={() => navigate(-1)} />
-            </Typography>
-            {/* <div className="navUserTotem">
+          <div className="navProfil">
+            <Toolbar>
+              <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+                <ArrowBackIosNewIcon onClick={() => navigate(-1)} />
+              </Typography>
+              {/* <div className="navUserTotem">
               <a href="/profil">
                 <img src={totem} alt="" className="navUserImg" />
               </a>
             </div> */}
-            {localStorage.getItem("userIsLogged")?
-            (!followingArray.includes(userId) ? (
-              <Button
-                className="btnFollow"
-                color="inherit"
-                style={{ textTransform: "none" }}
-                sx={{ border: "solid 1px whitesmoke", borderRadius: "18px" }}
-                onClick={() => {
-                  followUser();
-                }}
-              >
-                suivre
-              </Button>
-            ) : (
-              <Button
-                className="btnFollow"
-                color="inherit"
-                style={{ textTransform: "none" }}
-                sx={{ border: "solid 1px whitesmoke", borderRadius: "18px" }}
-                onClick={() => {
-                  unfollowUser();
-                }}
-              >
-                désabonner
-              </Button>
-            )):null
-            }
-          </Toolbar>
+              {localStorage.getItem("userIsLogged") ? (
+                !followingArray.includes(userId) ? (
+                  <Button
+                    className="btnFollow"
+                    color="inherit"
+                    style={{ textTransform: "none" }}
+                    sx={{
+                      border: "solid 1px whitesmoke",
+                      borderRadius: "18px",
+                    }}
+                    onClick={() => {
+                      followUser();
+                    }}
+                  >
+                    Suivre
+                  </Button>
+                ) : (
+                  <Button
+                    className="btnFollow"
+                    color="inherit"
+                    style={{ textTransform: "none" }}
+                    sx={{
+                      border: "solid 1px whitesmoke",
+                      borderRadius: "18px",
+                    }}
+                    onClick={() => {
+                      unfollowUser();
+                    }}
+                  >
+                    Désabonner
+                  </Button>
+                )
+              ) : null}
+            </Toolbar>
           </div>
         </AppBar>
       </Box>
@@ -179,13 +183,25 @@ export default function Filter() {
         <NewHaikuButton />
       </div>
       <Snackbar open={open} autoHideDuration={2000} onClose={handleCloseAlert}>
-        <Alert onClose={handleCloseAlert} severity="success" sx={{ width: "100%" }}>
-           Vous êtes abonné!
+        <Alert
+          onClose={handleCloseAlert}
+          severity="success"
+          sx={{ width: "100%" }}
+        >
+          Vous êtes abonné!
         </Alert>
       </Snackbar>
-      <Snackbar open={openDesabonne} autoHideDuration={2000} onClose={handleCloseAlertDesabonne}>
-        <Alert onClose={handleCloseAlertDesabonne} severity="warning" sx={{ width: "100%" }}>
-           Vous êtes désabonné!
+      <Snackbar
+        open={openDesabonne}
+        autoHideDuration={2000}
+        onClose={handleCloseAlertDesabonne}
+      >
+        <Alert
+          onClose={handleCloseAlertDesabonne}
+          severity="warning"
+          sx={{ width: "100%" }}
+        >
+          Vous êtes désabonné!
         </Alert>
       </Snackbar>
     </>

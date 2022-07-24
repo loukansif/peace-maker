@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Toolbar from "@mui/material/Toolbar";
+import AppBar from "@mui/material/AppBar";
+import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
@@ -58,8 +61,6 @@ export default function Inscription() {
         body: JSON.stringify(newUser),
       })
         .then(() => {
-          // alert("vous etes enregistré");
-          
           handleClickAlert();
         })
         .catch((error) => {
@@ -89,6 +90,24 @@ export default function Inscription() {
   };
 
   return (
+    <>
+    <Box sx={{ flexGrow: 1 }}>
+        <AppBar
+          sx={{
+            position: "fixed",
+            bgcolor: "rgba(255,255,255,0)",
+            color: "whitesmoke",
+          }}
+          elevation={0}
+        >
+          <Toolbar>
+            <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+              <ArrowBackIosNewIcon onClick={() => navigate(-1)}/>
+            </Typography>
+
+          </Toolbar>
+        </AppBar>
+      </Box>
     <div className="main">
       <ThemeProvider theme={theme}>
         <Container component="main" maxWidth="xs">
@@ -342,5 +361,7 @@ export default function Inscription() {
         </Alert>
       </Snackbar>
     </div>
+    
+    </>
   );
 }

@@ -110,6 +110,9 @@ export default function TabsHome() {
   };
 
   const getConnectUserById = () => {
+    if(!localStorage.getItem("userId")){
+      return
+    }
     fetch(`http://localhost:5000/users/user/${localStorage.getItem("userId")}`)
       .then((resp) => resp.json())
       .then((res) => {
@@ -134,7 +137,8 @@ export default function TabsHome() {
   useEffect(() => {
     getHaikus();
     getHaikusByVote();
-  }, [currentHaiku]);
+    getConnectUserById()
+  }, []);
 
   return (
     <Box sx={{ dp: 2, width: "100%", typography: "body1" }} className="margTop">
@@ -212,14 +216,15 @@ export default function TabsHome() {
                       elevation={8}
                       sx={{
                         padding: 2,
-                        backgroundColor: "rgba(255,255,255,0)",
+                        backgroundColor: "rgba(0,0,0,0.2)",
                         color: "whitesmoke",
                         width: "90%",
                         marginBottom: 4,
                         borderRadius: "25px",
+                        position: "relative",
                       }}
                     >
-                      <a href={"/profil/" + haiku.user._id}>
+                      <a href={haiku.user._id === localStorage.getItem('userId') ? "/profil" : "/profil/" + haiku.user._id}>
                         <Avatar
                           key={haiku.user._id}
                           className="totemPosition"
@@ -288,14 +293,15 @@ export default function TabsHome() {
                       elevation={8}
                       sx={{
                         padding: 2,
-                        backgroundColor: "rgba(255,255,255,0)",
+                        backgroundColor: "rgba(0,0,0,0.2)",
                         color: "whitesmoke",
                         width: "90%",
                         marginBottom: 4,
                         borderRadius: "25px",
+                        position: "relative",
                       }}
                     >
-                      <a href={"/profil/" + haiku.user._id}>
+                      <a href={haiku.user._id === localStorage.getItem('userId') ? "/profil" : "/profil/" + haiku.user._id}>
                         <Avatar
                           key={haiku.user._id}
                           className="totemPosition"
@@ -326,9 +332,9 @@ export default function TabsHome() {
             <p className="loadMoreHaikusIcone"> load more </p>
           </div>
         </TabPanel>
-        <TabPanel value="3" style={{ top: 60, left: 0, marginLeft: 10 }}>
+        <TabPanel value="3" style={{ top: 60, left: 0, marginLeft: 10, color: "white" }}>
           {localStorage.getItem("userIsLogged")
-            ? (getConnectUserById(),
+            ? (
               userFollowing.length > 0 ? (
                 <>
                   {currentHaiku && (
@@ -368,14 +374,15 @@ export default function TabsHome() {
                               elevation={8}
                               sx={{
                                 padding: 2,
-                                backgroundColor: "rgba(255,255,255,0)",
+                                backgroundColor: "rgba(0,0,0,0.2)",
                                 color: "whitesmoke",
                                 width: "90%",
                                 marginBottom: 4,
                                 borderRadius: "25px",
+                                position: "relative",
                               }}
                             >
-                              <a href={"/profil/" + haiku.user._id}>
+                              <a href={haiku.user._id === localStorage.getItem('userId') ? "/profil" : "/profil/" + haiku.user._id}>
                                 <Avatar
                                   key={haiku.user._id}
                                   className="totemPosition"

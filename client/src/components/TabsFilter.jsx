@@ -37,6 +37,39 @@ export default function TabsFilter() {
     setCurrentHaiku(haiku);
   };
 
+  const updateVote = (index) => {
+    currentHaiku.reactionss[index]++;
+    currentHaiku.totalVote++;
+    updateReactions();
+    closeVote();
+  };
+
+  const closeVote = () => {
+    if (currentHaiku) {
+      setCurrentHaiku(null);
+    }
+  };
+
+  const updateReactions = () => {
+    fetch(`http://localhost:5000/haikus/${currentHaiku._id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        reactionss: currentHaiku.reactionss,
+        totalVote: currentHaiku.totalVote,
+      }),
+    })
+      .then(() => {
+        // handleClickAlert();
+      })
+      .catch((error) => {
+        window.alert(error);
+        return;
+      });
+  };
+
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
@@ -98,6 +131,23 @@ export default function TabsFilter() {
             value="1"
             style={{ top: 90, left: 0, marginLeft: 10, marginTop: 20 }}
           >
+            {currentHaiku && (
+              <div className="emojisSelect">
+                {reactionsImg.map((i, index) => {
+                  return (
+                    <span className="emojiContainer" key={index}>
+                      <img
+                        src={reactionsImg[index]}
+                        className="emojisSelectItem"
+                        alt=""
+                        onClick={() => updateVote(index)}
+                      />
+                      <span>{currentHaiku.reactionss[index]}</span>
+                    </span>
+                  );
+                })}
+              </div>
+            )}
             <div className="haikus">
               {haikus.map((haiku) => {
                 let nbReaction = 0;
@@ -109,17 +159,20 @@ export default function TabsFilter() {
                 }
                 return userId === haiku.user._id ? (
                   <div key={haiku._id}>
-                    <div className={currentHaiku ? "haikuDisplay" : ""}>
+                    <div
+                      className={currentHaiku ? "haikuDisplay" : ""}
+                      onClick={closeVote}
+                    >
                       <Paper
                         elevation={8}
                         sx={{
                           padding: 2,
-                          backgroundColor: "rgba(255,255,255,0)",
+                          backgroundColor: "rgba(0,0,0,0.2)",
                           color: "whitesmoke",
                           width: "90%",
                           marginBottom: 4,
-                          borderRadius: "25px"
-
+                          borderRadius: "25px",
+                          position: "relative",
                         }}
                       >
                         <Avatar
