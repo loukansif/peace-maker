@@ -51,7 +51,7 @@ export default function TabsFilter() {
   };
 
   const updateReactions = () => {
-    fetch(`http://localhost:5000/haikus/${currentHaiku._id}`, {
+    fetch(`https://haikuz.herokuapp.com/haikus/${currentHaiku._id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -77,7 +77,7 @@ export default function TabsFilter() {
   // récupération de tous mes Haikus
 
   const getHaikus = () => {
-    fetch("http://localhost:5000/haikus")
+    fetch("https://haikuz.herokuapp.com/haikus")
       .then((response) => {
         return response.json();
       })

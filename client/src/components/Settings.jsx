@@ -62,7 +62,7 @@ export default function Settings() {
       let updateUser = { ...form };
 
       fetch(
-        `http://localhost:5000/users/${localStorage.getItem("userEmail")}`,
+        `https://haikuz.herokuapp.com/users/${localStorage.getItem("userEmail")}`,
         {
           method: "PUT",
           headers: {

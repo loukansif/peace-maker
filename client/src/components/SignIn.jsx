@@ -43,7 +43,7 @@ export default function Connexion() {
       password: data.get("password"),
     });
 
-    fetch(`http://localhost:5000/users/${email}`)
+    fetch(`https://haikuz.herokuapp.com/users/${email}`)
       .then((resp) => resp.json())
       .then((jresponse) => {
         if (jresponse === null) {

@@ -31,7 +31,7 @@ export default function Filter() {
   // };
 
   const getConnectUserById = () => {    
-    fetch(`http://localhost:5000/users/user/${localStorage.getItem("userId")}`)
+    fetch(`https://haikuz.herokuapp.com/users/user/${localStorage.getItem("userId")}`)
       .then((resp) => resp.json())
       .then((res) => {
         setFollowingArray(res.following);
@@ -44,7 +44,7 @@ export default function Filter() {
       following: followingArray,
     };
 
-    fetch(`http://localhost:5000/users/${localStorage.getItem("userEmail")}`, {
+    fetch(`https://haikuz.herokuapp.com/users/${localStorage.getItem("userEmail")}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -67,7 +67,7 @@ export default function Filter() {
       following: followingArray,
     };
 
-    fetch(`http://localhost:5000/users/${localStorage.getItem("userEmail")}`, {
+    fetch(`https://haikuz.herokuapp.com/users/${localStorage.getItem("userEmail")}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",

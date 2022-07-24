@@ -103,7 +103,7 @@ export default function FormNewHaiku() {
     //// MISE A JOUR DU FULL HAIKU (HAIKU COMPLET) ////
     let newHaiku = { ...form };
 
-    fetch("http://localhost:5000/haikus/", {
+    fetch("https://haikuz.herokuapp.com/haikus/", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

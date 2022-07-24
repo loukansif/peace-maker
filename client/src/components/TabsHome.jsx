@@ -49,7 +49,7 @@ export default function TabsHome() {
   // récupération de tous les Haikus
 
   const getHaikus = () => {
-    fetch("http://localhost:5000/haikus")
+    fetch("https://haikuz.herokuapp.com/haikus")
       .then((response) => {
         return response.json();
       })
@@ -62,7 +62,7 @@ export default function TabsHome() {
   // récupérations des Haikus triés par top vote
 
   const getHaikusByVote = () => {
-    fetch("http://localhost:5000/haikus/top")
+    fetch("https://haikuz.herokuapp.com/haikus/top")
       .then((response) => {
         return response.json();
       })
@@ -90,7 +90,7 @@ export default function TabsHome() {
   };
 
   const updateReactions = () => {
-    fetch(`http://localhost:5000/haikus/${currentHaiku._id}`, {
+    fetch(`https://haikuz.herokuapp.com/haikus/${currentHaiku._id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -113,7 +113,7 @@ export default function TabsHome() {
     if(!localStorage.getItem("userId")){
       return
     }
-    fetch(`http://localhost:5000/users/user/${localStorage.getItem("userId")}`)
+    fetch(`https://haikuz.herokuapp.com/users/user/${localStorage.getItem("userId")}`)
       .then((resp) => resp.json())
       .then((res) => {
         setUserFollowing(res.following);

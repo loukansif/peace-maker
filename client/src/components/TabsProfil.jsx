@@ -59,7 +59,7 @@ export default function TabsProfil() {
   // récupération de tous mes Haikus
 
   const getHaikus = () => {
-    fetch("http://localhost:5000/haikus")
+    fetch("https://haikuz.herokuapp.com/haikus")
       .then((response) => {
         return response.json();
       })
@@ -70,7 +70,7 @@ export default function TabsProfil() {
   };
 
   const deleteHaiku = (id) => {
-    fetch(`http://localhost:5000/haikus/${id}`, {
+    fetch(`https://haikuz.herokuapp.com/haikus/${id}`, {
       method: "DELETE",
     })
       .then(() => {
@@ -97,7 +97,7 @@ export default function TabsProfil() {
   };
 
   const updateReactions = () => {
-    fetch(`http://localhost:5000/haikus/${currentHaiku._id}`, {
+    fetch(`https://haikuz.herokuapp.com/haikus/${currentHaiku._id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
