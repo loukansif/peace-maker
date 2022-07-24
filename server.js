@@ -17,6 +17,11 @@ app.use(express.urlencoded({ extended: true }));
 app.use("/users", routerUser)
 app.use("/haikus", routerHaiku)
 
+routerHaiku.get('/', async (req, res) => {
+  let haikus = 'hello'
+  res.json(haikus);
+})
+
 
 main().catch((err) => console.error(err));
 async function main() {
