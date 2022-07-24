@@ -19,18 +19,18 @@ const Alert = React.forwardRef(function Alert(props, ref) {
 export default function Filter() {
   let navigate = useNavigate();
   const { userId } = useParams();
-  const [totem, setTotem] = useState("");
   const [followingArray, setFollowingArray] = useState([]);
+  // const [totem, setTotem] = useState("");
 
-  const getUserById = () => {
-    fetch(`http://localhost:5000/users/user/${userId}`)
-      .then((resp) => resp.json())
-      .then((res) => {
-        setTotem(res.totem);
-      });
-  };
+  // const getUserById = () => {
+  //   fetch(`http://localhost:5000/users/user/${userId}`)
+  //     .then((resp) => resp.json())
+  //     .then((res) => {
+  //       setTotem(res.totem);
+  //     });
+  // };
 
-  const getConnectUserById = () => {
+  const getConnectUserById = () => {    
     fetch(`http://localhost:5000/users/user/${localStorage.getItem("userId")}`)
       .then((resp) => resp.json())
       .then((res) => {
@@ -53,6 +53,7 @@ export default function Filter() {
     })
       .then(() => {
         handleClickAlert();
+        getConnectUserById();
       })
       .catch((error) => {
         window.alert(error);
@@ -75,6 +76,7 @@ export default function Filter() {
     })
       .then(() => {
         handleClickAlertDesabonne();
+        getConnectUserById();
       })
       .catch((error) => {
         window.alert(error);
@@ -111,11 +113,10 @@ export default function Filter() {
   };
 
   useEffect(() => {
-    getUserById();
-    if (localStorage.getItem("userIsLogged")) {
+    if(localStorage.getItem("userIsLogged")){
       getConnectUserById();
     }
-  });
+  },[]);
 
   return (
     <>

@@ -89,7 +89,7 @@ export default function TabsFilter() {
 
   useEffect(() => {
     getHaikus();
-  }, [currentHaiku]);
+  }, []);
   return (
     <>
       <div className="blurBackground"> </div>
@@ -167,11 +167,12 @@ export default function TabsFilter() {
                         elevation={8}
                         sx={{
                           padding: 2,
-                          backgroundColor: "rgba(255,255,255,0)",
+                          backgroundColor: "rgba(0,0,0,0.2)",
                           color: "whitesmoke",
                           width: "90%",
                           marginBottom: 4,
                           borderRadius: "25px",
+                          position: "relative",
                         }}
                       >
                         <Avatar

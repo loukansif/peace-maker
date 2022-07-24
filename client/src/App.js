@@ -19,13 +19,23 @@ export default function App() {
     <>
       
       <div className="App">
+      <div className="animation-area">
+        <ul className="box-area">
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+        </ul>
+      </div>
         <Routes>
           <Route path="/" element={<><Nav /><Home /></>} />
           <Route path="/inscription" element={<><SignUp /></>} />
           <Route path="/connexion" element={<><SignIn /></>} />
-          <Route path="/" element={<Home />} />
-          <Route path="/inscription" element={<SignUp />} />
-          <Route path="/connexion" element={<SignIn />} />
+          {/* <Route path="/" element={<Home />} /> */}
+          {/* <Route path="/inscription" element={<SignUp />} /> */}
+          {/* <Route path="/connexion" element={<SignIn />} /> */}
           <Route path="/newhaiku" element={<FormNewHaiku />} />
           <Route path="/profil" element={<Profil />} />
           <Route path="/profil/:userId" element={<Filter />} />

@@ -1,13 +1,11 @@
 import React from "react";
-import Typography from "@mui/material/Typography";
+import img from "../assets/img/404-error.png";
 
 export default function PageNotFound() {
   return (
-    <Typography variant="body2" color="white" align="center" className="main">
-      <div>
-        <h1>404 Error</h1>
-        <h1>Page Not Found</h1>
-      </div>
-    </Typography>
+    <>
+      <img src={img} alt="404 page not found" className="pageNotFoundImgO" />
+      <img src={img} alt="404 page not found" className="pageNotFoundImg" />
+    </>
   );
 }

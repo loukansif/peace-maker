@@ -213,7 +213,7 @@ export default function FormNewHaiku() {
               </Typography>
               <div className="newHaikuLine">
                 <TextField
-                isRequired="true"
+                required
                  sx={{ input: { color: 'white' } }}
                   inputProps={{ maxLength: 30  }}
                   style={{ width: "100%" }}
