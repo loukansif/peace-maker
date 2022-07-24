@@ -209,7 +209,7 @@ export default function FormNewHaiku() {
                 justify="flex-start"
                 sx={{ color: "whitesmoke", marginBottom: 2 }}
               >
-                nouvel Haïku
+                Nouvel Haïku
               </Typography>
               <div className="newHaikuLine">
                 <TextField
@@ -351,7 +351,7 @@ export default function FormNewHaiku() {
           severity="warning"
           sx={{ width: "100%" }}
         >
-          Pas de gros mots!
+          Propos inapproprié !
         </Alert>
       </Snackbar>
       <Snackbar
