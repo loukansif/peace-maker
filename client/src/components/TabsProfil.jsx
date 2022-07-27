@@ -7,7 +7,6 @@ import TabPanel from "@mui/lab/TabPanel";
 import Paper from "@mui/material/Paper";
 import Avatar from "@mui/material/Avatar";
 import Typography from "@mui/material/Typography";
-import Chip from "@mui/joy/Chip";
 import ChipDelete from "@mui/joy/ChipDelete";
 import DeleteForever from "@mui/icons-material/DeleteForever";
 import Button from "@mui/material/Button";
@@ -18,6 +17,8 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import FavoriteIcon from "@mui/icons-material/Favorite";
 
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -139,6 +140,45 @@ export default function TabsProfil() {
     }
     
     setOpenDelete(false);    
+  };
+
+  const favoriteFunc = (fav) => {
+    fav.favorite.push(localStorage.getItem("userId"));
+    fetch(`http://localhost:5000/haikus/${fav._id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ favorite: fav.favorite }),
+    })
+      .then(() => {
+        getHaikus();
+      })
+      .catch((error) => {
+        window.alert(error);
+        return;
+      });
+  };
+
+  const unfavoriteFunc = (fav) => {
+    fav.favorite.splice(
+      fav.favorite.indexOf(localStorage.getItem("userId")),
+      1
+    );
+    fetch(`http://localhost:5000/haikus/${fav._id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ favorite: fav.favorite }),
+    })
+      .then(() => {
+        getHaikus();
+      })
+      .catch((error) => {
+        window.alert(error);
+        return;
+      });
   };
 
   useEffect(() => {
@@ -266,7 +306,86 @@ export default function TabsProfil() {
             </div>
           </TabPanel>
 
-          <TabPanel value="2">My favoris</TabPanel>
+          <TabPanel value="2" style={{ top: 90, left: 0, marginLeft: 10, marginTop: 20 }}>
+          {currentHaiku && (
+              <div className="emojisSelect">
+                {reactionsImg.map((i, index) => {
+                  return (
+                    <span className="emojiContainer" key={index}>
+                      <img
+                        src={reactionsImg[index]}
+                        className="emojisSelectItem"
+                        alt=""
+                        onClick={() => updateVote(index)}
+                      />
+                      <span>{currentHaiku.reactionss[index]}</span>
+                    </span>
+                  );
+                })}
+              </div>
+            )}
+
+            <div className="haikus">
+              {haikus.map((haiku) => {
+                let nbReaction = 0;
+                for (let i = 0; i < haiku.reactionss.length; i++) {
+                  if (haiku.reactionss[i] > nbReaction) {
+                    nbReaction = haiku.reactionss[i];
+                    imgEmoji = reactionsImg[i];
+                  }
+                }
+                return  haiku.favorite.includes(localStorage.getItem("userId")) ? (
+                  <div key={haiku._id} onClick={closeVote}>
+                    <div className={currentHaiku ? "haikuDisplay" : ""}>
+                      <Paper
+                        elevation={8}
+                        sx={{
+                          padding: 2,
+                          backgroundColor: "rgba(0,0,0,0.2)",
+                          color: "whitesmoke",
+                          width: "90%",
+                          marginBottom: 4,
+                          borderRadius: "25px",
+                          position: "relative",
+                        }}
+                      >
+                        <Avatar
+                          className="totemPosition"
+                          sx={{ width: 70, height: 70 }}
+                          src={haiku.user.totem}
+                        />
+                        <div className="textHaiku">
+                          <Typography sx={{ marginTop: -9 }}>
+                            {haiku.line1}
+                          </Typography>
+                          <Typography>{haiku.line2}</Typography>
+                          <Typography>{haiku.line3}</Typography>
+                        </div>
+                        {localStorage.getItem("userIsLogged") && (
+                      <div className="favoritePosition">
+                        {haiku.favorite.includes(
+                          localStorage.getItem("userId")
+                        ) ? (
+                          <FavoriteIcon onClick={() => unfavoriteFunc(haiku)} />
+                        ) : (
+                          <FavoriteBorderIcon
+                            onClick={() => favoriteFunc(haiku)}
+                          />
+                        )}
+                      </div>
+                    )}
+                        <Avatar
+                          className="emojiPosition"
+                          src={imgEmoji}
+                          onClick={() => emojisFunction(haiku)}
+                        />
+                      </Paper>
+                    </div>
+                  </div>
+                ) : null;
+              })}
+            </div>
+            </TabPanel>
         </TabContext>
       </Box>
       <div>

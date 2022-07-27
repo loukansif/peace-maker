@@ -52,6 +52,7 @@ export default function FormNewHaiku() {
     line3: "",
     createdAt: "",
     reactionss: [0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    favorite:[]
   });
 
   // modération /////////////////////////////////////////

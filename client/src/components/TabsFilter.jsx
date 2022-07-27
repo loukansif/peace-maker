@@ -8,6 +8,8 @@ import TabList from "@mui/lab/TabList";
 import Paper from "@mui/material/Paper";
 import Avatar from "@mui/material/Avatar";
 import Typography from "@mui/material/Typography";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import FavoriteIcon from "@mui/icons-material/Favorite";
 
 export default function TabsFilter() {
   const { userId } = useParams();
@@ -85,6 +87,45 @@ export default function TabsFilter() {
         setHaikus(result);
       })
       .catch((error) => console.log(error));
+  };
+
+  const favoriteFunc = (fav) => {
+    fav.favorite.push(localStorage.getItem("userId"));
+    fetch(`http://localhost:5000/haikus/${fav._id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ favorite: fav.favorite }),
+    })
+      .then(() => {
+        getHaikus();
+      })
+      .catch((error) => {
+        window.alert(error);
+        return;
+      });
+  };
+
+  const unfavoriteFunc = (fav) => {
+    fav.favorite.splice(
+      fav.favorite.indexOf(localStorage.getItem("userId")),
+      1
+    );
+    fetch(`http://localhost:5000/haikus/${fav._id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ favorite: fav.favorite }),
+    })
+      .then(() => {
+        getHaikus();
+      })
+      .catch((error) => {
+        window.alert(error);
+        return;
+      });
   };
 
   useEffect(() => {
@@ -187,7 +228,21 @@ export default function TabsFilter() {
                           <Typography>{haiku.line2}</Typography>
                           <Typography>{haiku.line3}</Typography>
                         </div>
-
+                        {localStorage.getItem("userIsLogged") && (
+                              <div className="favoritePosition">
+                                {haiku.favorite.includes(
+                                  localStorage.getItem("userId")
+                                ) ? (
+                                  <FavoriteIcon
+                                    onClick={() => unfavoriteFunc(haiku)}
+                                  />
+                                ) : (
+                                  <FavoriteBorderIcon
+                                    onClick={() => favoriteFunc(haiku)}
+                                  />
+                                )}
+                              </div>
+                            )}
                         <Avatar
                           className="emojiPosition"
                           src={imgEmoji}
@@ -201,7 +256,86 @@ export default function TabsFilter() {
             </div>
           </TabPanel>
 
-          <TabPanel value="2">My favoris</TabPanel>
+          <TabPanel value="2" style={{ top: 90, left: 0, marginLeft: 10, marginTop: 20 }}>
+          {currentHaiku && (
+              <div className="emojisSelect">
+                {reactionsImg.map((i, index) => {
+                  return (
+                    <span className="emojiContainer" key={index}>
+                      <img
+                        src={reactionsImg[index]}
+                        className="emojisSelectItem"
+                        alt=""
+                        onClick={() => updateVote(index)}
+                      />
+                      <span>{currentHaiku.reactionss[index]}</span>
+                    </span>
+                  );
+                })}
+              </div>
+            )}
+
+            <div className="haikus">
+              {haikus.map((haiku) => {
+                let nbReaction = 0;
+                for (let i = 0; i < haiku.reactionss.length; i++) {
+                  if (haiku.reactionss[i] > nbReaction) {
+                    nbReaction = haiku.reactionss[i];
+                    imgEmoji = reactionsImg[i];
+                  }
+                }
+                return  haiku.favorite.includes(localStorage.getItem("userId")) ? (
+                  <div key={haiku._id} onClick={closeVote}>
+                    <div className={currentHaiku ? "haikuDisplay" : ""}>
+                      <Paper
+                        elevation={8}
+                        sx={{
+                          padding: 2,
+                          backgroundColor: "rgba(0,0,0,0.2)",
+                          color: "whitesmoke",
+                          width: "90%",
+                          marginBottom: 4,
+                          borderRadius: "25px",
+                          position: "relative",
+                        }}
+                      >
+                        <Avatar
+                          className="totemPosition"
+                          sx={{ width: 70, height: 70 }}
+                          src={haiku.user.totem}
+                        />
+                        <div className="textHaiku">
+                          <Typography sx={{ marginTop: -9 }}>
+                            {haiku.line1}
+                          </Typography>
+                          <Typography>{haiku.line2}</Typography>
+                          <Typography>{haiku.line3}</Typography>
+                        </div>
+                        {localStorage.getItem("userIsLogged") && (
+                      <div className="favoritePosition">
+                        {haiku.favorite.includes(
+                          localStorage.getItem("userId")
+                        ) ? (
+                          <FavoriteIcon onClick={() => unfavoriteFunc(haiku)} />
+                        ) : (
+                          <FavoriteBorderIcon
+                            onClick={() => favoriteFunc(haiku)}
+                          />
+                        )}
+                      </div>
+                    )}
+                        <Avatar
+                          className="emojiPosition"
+                          src={imgEmoji}
+                          onClick={() => emojisFunction(haiku)}
+                        />
+                      </Paper>
+                    </div>
+                  </div>
+                ) : null;
+              })}
+            </div>
+            </TabPanel>
         </TabContext>
       </Box>
     </>

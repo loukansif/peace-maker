@@ -4,17 +4,12 @@
   font-family: Open Sans;
 }
 
-
-
 .main {
-  // margin: auto 10px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  // padding: 45px 10px 0;
   padding: 45px 0px 0;
-
 }
 
 .App {
@@ -22,7 +17,6 @@
 }
 
 body {
-  // background-image: url(./assets/img/fondHaiku.png);
   background-repeat: no-repeat left center fixed;
   background-attachment: fixed;
   background-size: cover;
@@ -38,10 +32,9 @@ body {
 }
 
 .blur {
-  z-index:100;
+  z-index: 100;
   backdrop-filter: blur(10px);
 }
-
 
 @media (max-width: 880px) {
   .title {
@@ -53,7 +46,7 @@ body {
   margin-top: 76px;
 }
 
-.blurBackground{
+.blurBackground {
   position: fixed;
   top: 0;
   height: 80px;
@@ -81,7 +74,7 @@ body {
   width: 210px;
 }
 
-.buttonNav { 
+.buttonNav {
   margin-right: 14px;
 }
 .logoImg {
@@ -108,6 +101,13 @@ body {
   left: -50px;
 }
 
+.favoritePosition {
+  width: 28px !important;
+  height: 28px !important;
+  position: absolute !important;
+  right: -4px;
+  top: -5px;
+}
 
 .emojiPosition {
   width: 50px !important;
@@ -123,8 +123,8 @@ body {
   padding-top: 4px;
 }
 .navUserImgLink {
-height: 0
-;}
+  height: 0;
+}
 
 .navUserTotem {
   border: 1px solid white;
@@ -134,7 +134,7 @@ height: 0
   margin-right: 20px;
   margin-top: 8px;
   width: 25px;
-  filter: invert(0.80)
+  filter: invert(0.8);
 }
 
 .textHaiku {
@@ -147,11 +147,11 @@ height: 0
 }
 .loadMoreHaikusIcone {
   color: rgba(255, 255, 255, 0.8);
-  text-align: center
+  text-align: center;
 }
 .loadMoreHaikusIcone {
   color: rgba(255, 255, 255, 0.8);
-  text-align: center
+  text-align: center;
 }
 /////////////////////////////////////////////
 // BOUTONS FOOTER FILTRES ET NOUVEL HAIKU //
@@ -162,7 +162,7 @@ height: 0
   right: 6%;
   bottom: 4px;
 }
-.footerButtons  {
+.footerButtons {
   display: flex;
   flex-direction: row;
   position: fixed;
@@ -171,9 +171,9 @@ height: 0
   left: 12%;
   bottom: 2px;
 }
-.footerButtons p  {
-color: #fff;
-text-decoration: none;
+.footerButtons p {
+  color: #fff;
+  text-decoration: none;
 }
 .moodSelectionButton {
   margin-right: 20px;
@@ -190,7 +190,7 @@ text-decoration: none;
   justify-content: space-between;
   justify-items: center;
 }
-.backgroundfooterButton{
+.backgroundfooterButton {
   background: rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(10px);
   box-shadow: 0px -5px 100px rgb(0, 0, 0);
@@ -201,8 +201,6 @@ text-decoration: none;
 }
 ////////// FIN DU CSS BOUTONS FOOTER ////
 /////////////////////////////////////////
-
-
 
 #Root {
   height: 100%;
@@ -227,7 +225,7 @@ text-decoration: none;
   width: 325px;
   z-index: 1;
   position: fixed;
-  background-color: black;
+  background-color: #00000080;
   border-radius: 25px;
   top: 50%;
   left: 50%;
@@ -423,90 +421,85 @@ text-decoration: none;
   }
 }
 
-
-
-
-
-
-
-
-
-
 .animation-area {
-  background: rgb(32,160,231);
-	// background: linear-gradient(to left, #8942a8, #ba382f);
+  background: rgb(32, 160, 231);
+  // background: linear-gradient(to left, #8942a8, #ba382f);
   // background: linear-gradient(to left, #6a7dea, #e01dba);
-  background: linear-gradient(90deg, rgb(32, 160, 231) 0%, rgb(60 190 136) 100%);
+  background: linear-gradient(
+    90deg,
+    rgb(32, 160, 231) 0%,
+    rgb(60 190 136) 100%
+  );
   // background: linear-gradient(to left, #67cd63, #4c4b4c);
   // background: linear-gradient(to left, #3f57ff, #4c4b4c);
   width: 100%;
-	height: 100vh;
+  height: 100vh;
   position: fixed;
   z-index: -1;
 }
 .box-area {
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	overflow: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
 }
 .box-area li {
-	position: absolute;
-	display: block;
-	list-style: none;
-	width: 25px;
-	height: 25px;
-	background: rgba(255, 255, 255, 0.2);
-	animation: animate 20s linear infinite;
-	bottom: -150px;
+  position: absolute;
+  display: block;
+  list-style: none;
+  width: 25px;
+  height: 25px;
+  background: rgba(255, 255, 255, 0.2);
+  animation: animate 20s linear infinite;
+  bottom: -150px;
 }
 .box-area li:nth-child(1) {
-	left: 86%;
-	width: 80px;
-	height: 80px;
-	animation-delay: 0s;
+  left: 86%;
+  width: 80px;
+  height: 80px;
+  animation-delay: 0s;
 }
 .box-area li:nth-child(2) {
-	left: 12%;
-	width: 30px;
-	height: 30px;
-	animation-delay: 1.5s;
-	animation-duration: 10s;
+  left: 12%;
+  width: 30px;
+  height: 30px;
+  animation-delay: 1.5s;
+  animation-duration: 10s;
 }
 .box-area li:nth-child(3) {
-	left: 70%;
-	width: 100px;
-	height: 100px;
-	animation-delay: 5.5s;
+  left: 70%;
+  width: 100px;
+  height: 100px;
+  animation-delay: 5.5s;
 }
 .box-area li:nth-child(4) {
-	left: 42%;
-	width: 150px;
-	height: 150px;
-	animation-delay: 0s;
-	animation-duration: 15s;
+  left: 42%;
+  width: 150px;
+  height: 150px;
+  animation-delay: 0s;
+  animation-duration: 15s;
 }
 .box-area li:nth-child(5) {
-	left: 65%;
-	width: 40px;
-	height: 40px;
-	animation-delay: 0s;
+  left: 65%;
+  width: 40px;
+  height: 40px;
+  animation-delay: 0s;
 }
 .box-area li:nth-child(6) {
-	left: 15%;
-	width: 110px;
-	height: 110px;
-	animation-delay: 3.5s;
+  left: 15%;
+  width: 110px;
+  height: 110px;
+  animation-delay: 3.5s;
 }
 @keyframes animate {
-	0% {
-		transform: translateY(0) rotate(0deg);
-		opacity: 1;
-	}
-	100% {
-		transform: translateY(-800px) rotate(360deg);
-		opacity: 0;
-	}
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-800px) rotate(360deg);
+    opacity: 0;
+  }
 }
