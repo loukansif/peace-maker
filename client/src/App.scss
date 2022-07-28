@@ -136,7 +136,7 @@ height: 0
   margin-right: 20px;
   margin-top: 8px;
   width: 25px;
-  filter: invert(0.80)
+  filter: invert(1)
 }
 
 .textHaiku {
@@ -254,6 +254,10 @@ text-decoration: none;
 }
 
 ////////////// footer //////////////
+
+.invisible-footer{
+color: rgba(0, 0, 0, 0);
+}
 
 .footer-distributed {
   background: #333333;
