@@ -75,7 +75,6 @@ export default function FormNewHaiku() {
     })
       .then(function (response) {
         // on success: handle response
-        console.log(response.data.profanity.matches.length);
         if (response.data.profanity.matches.length !== 0) {
           handleClickAlert();
         }
@@ -90,7 +89,6 @@ export default function FormNewHaiku() {
   // fin modération /////////////////////////////
 
   function updateForm(value) {
-    console.log(value);
     return setForm((prev) => {
       return { ...prev, ...value };
     });

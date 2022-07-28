@@ -398,7 +398,7 @@ export default function TabsProfil() {
           <DialogTitle id="alert-dialog-title">{"SUPPRESSION !"}</DialogTitle>
           <DialogContent>
             <DialogContentText id="alert-dialog-description">
-              Êtes-vous sûr de vouloir supprimer cet Haiku ?
+              Voulez-vous vraiment supprimer définitivement cet Haiku ?
             </DialogContentText>
           </DialogContent>
           <DialogActions>
@@ -410,7 +410,7 @@ export default function TabsProfil() {
               }}
               autoFocus
             >
-              Valider
+              Supprimer
             </Button>
           </DialogActions>
         </Dialog>
