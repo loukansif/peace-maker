@@ -11,6 +11,7 @@ export default function ButtonAppBar() {
   return (
     <>
       <div className="blurBackground"> </div>
+      <div className="HaikuSection">
       <Box sx={{ flexGrow: 1, p: 2 }} mb={-2}>
         <AppBar
           sx={{
@@ -59,6 +60,7 @@ export default function ButtonAppBar() {
           </Toolbar>
         </AppBar>
       </Box>
+      </div>
     </>
   );
 }

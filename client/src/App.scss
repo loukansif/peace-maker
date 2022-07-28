@@ -51,6 +51,8 @@ body {
 }
 .margTop {
   margin-top: 76px;
+  display: flex;
+  min-width: 300px;
 }
 
 .blurBackground{
@@ -65,7 +67,7 @@ body {
 .blurBackgroundProfil {
   position: fixed;
   top: 0;
-  height: 80px;
+  height: 110px;
   width: 100%;
   backdrop-filter: blur(10px);
   z-index: 0;
@@ -87,6 +89,7 @@ body {
 .logoImg {
   width: 110px;
 }
+
 
 .totemItems {
   text-align: center;
@@ -418,18 +421,53 @@ text-decoration: none;
     display: none;
   }
 
+
   .totemItem {
     width: 60px;
   }
 }
 
+///////////////////////////////////// DESKTOP CSS //////////////////////////////////////////////////////////////////////////////////
+
+@media only screen and (min-width: 800px) {
+
+  .main {
+    // margin: auto 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    // padding: 45px 10px 0;
+    padding: 45px 0px 0;
+        max-width: 800px;
+        margin: auto;
+  }
+    // Haiku Section
+.HaikuSection {
+  margin-bottom: 34px;
+}
+.textHaiku {
+  font-size: 200px;
+}
+.blurBackground{
+  position: fixed;
+  top: 0;
+  height: 108px;
+  width: 100%;
+  backdrop-filter: blur(10px);
+  z-index: 999;
+}
+
+}
+
+//////////////////////////////////////////// FIN DESKTOP CSS ////////////////////////////////////////////////////////////////////
 
 
 
 
 
 
-
+// BACKGROUND ANIMATION
 
 
 .animation-area {
