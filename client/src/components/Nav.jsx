@@ -11,7 +11,7 @@ export default function ButtonAppBar() {
   return (
     <>
       <div className="blurBackground"> </div>
-      <Box sx={{ flexGrow: 1, p: 2 }} mb={-4}>
+      <Box sx={{ flexGrow: 1, p: 2 }} mb={-2}>
         <AppBar
           sx={{
             position: "fixed",
