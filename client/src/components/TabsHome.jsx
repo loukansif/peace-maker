@@ -158,7 +158,7 @@ export default function TabsHome() {
           <TabList
             onChange={handleChange}
             aria-label="lab API tabs example"
-            style={{ top: 60, left: 0, marginTop: 18 }}
+            style={{ top: 60, left: 0, marginTop: 18}}
             TabIndicatorProps={{ style: { backgroundColor: "white" } }}
           >
             <Tab
@@ -181,6 +181,8 @@ export default function TabsHome() {
             />
           </TabList>
         </Box>
+        <div className="AllTabSection">
+        <div className="TabAndHaikusSection1">
         <TabPanel value="1" style={{ top: 60, left: 0, marginLeft: 10 }}>
           {currentHaiku && (
             <div className="emojisSelect">
@@ -258,6 +260,8 @@ export default function TabsHome() {
             <p className="loadMoreHaikusIcone"> load more </p>
           </div>
         </TabPanel>
+        </div>
+        <div className="TabAndHaikusSection2">
         <TabPanel value="2" style={{ top: 60, left: 0, marginLeft: 10 }}>
           {currentHaiku && (
             <div className="emojisSelect">
@@ -324,10 +328,10 @@ export default function TabsHome() {
                         className="emojiPosition"
                         src={imgEmoji}
                         onClick={() => emojisFunction(haiku)}
-                      />
-                    </Paper>
+                        />
+                        </Paper>
+                    </div>
                   </div>
-                </div>
               );
             })}
           </div>
@@ -335,6 +339,8 @@ export default function TabsHome() {
             <p className="loadMoreHaikusIcone"> load more </p>
           </div>
         </TabPanel>
+        </div>
+        <div className="TabAndHaikusSection3">
         <TabPanel value="3" style={{ top: 60, left: 0, marginLeft: 10, color: "white" }}>
           {localStorage.getItem("userIsLogged")
             ? (
@@ -418,6 +424,8 @@ export default function TabsHome() {
               ))
             : "Veuillez vous identifier!"}
         </TabPanel>
+        </div>
+        </div>
       </TabContext>
       <Snackbar open={open} autoHideDuration={2000} onClose={handleCloseAlert}>
         <Alert

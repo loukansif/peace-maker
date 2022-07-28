@@ -428,14 +428,16 @@ text-decoration: none;
 
 ///////////////////////////////////// DESKTOP CSS //////////////////////////////////////////////////////////////////////////////////
 
-@media only screen and (min-width: 800px) {
+@media only screen and (min-width: 760px) {
 
   .main {
     // margin: auto 10px;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
+
+    justify-items: center;
+        align-items: center;
     // padding: 45px 10px 0;
     padding: 45px 0px 0;
         max-width: 800px;
@@ -444,20 +446,138 @@ text-decoration: none;
     // Haiku Section
 .HaikuSection {
   margin-bottom: 34px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  justify-items: center;
+  margin:  auto;
+  width: 800px;
 }
-.textHaiku {
-  font-size: 200px;
-}
+
 .blurBackground{
   position: fixed;
-  top: 0;
+  top: -100;
   height: 108px;
   width: 100%;
   backdrop-filter: blur(10px);
   z-index: 999;
 }
-
+.margTop{
+  margin-top: 120px;
+  display: flex;
+  justify-content: center;
+  width: 100%;
 }
+
+.TabAndHaikusSection1{
+  width: 100%;
+}
+
+.TabAndHaikusSection1 p {
+  font-size: 0.1em;
+}
+.TabAndHaikusSection2 p {
+  font-size: 0.1em;
+}
+.TabAndHaikusSection3 p {
+  font-size: 0.1em;
+}
+
+.textHaiku {
+  font-size: 200px;
+  margin-left: 0%;
+}
+.haikuDisplay{
+  margin-bottom: 100px;
+}
+}
+
+@media only screen and (max-height: 950px) {
+
+
+.blurBackground{
+  position: fixed;
+  top: 0;
+  height: 76px;
+  width: 100%;
+  backdrop-filter: blur(10px);
+  z-index: 999;
+}
+.margTop{
+  margin-top: 90px;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+.textHaiku {
+  font-size: 200px;
+  margin-left: 0%;
+}
+}
+
+@media only screen and (max-width: 760px) {
+
+  .margTop{
+    margin-top: 100px;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    padding: 0;
+    margin-left: 0;
+    margin-right: 0;
+  }
+  
+  .TabAndHaikusSection1{
+    width: 100%;
+  }
+  
+  .TabAndHaikusSection p {
+    font-size: 0.1em;
+  }
+  .textHaiku {
+    font-size: 200px;
+    margin-left: 0%;
+  }
+  .haikuDisplay{
+    margin-bottom: 100px;
+  }
+  .AllTabSection {
+    width: 80%;
+  }
+  }
+  
+
+@media only screen and (max-width: 460px) {
+
+.margTop{
+  margin-top: 80px;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  padding: 0;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.TabAndHaikusSection1{
+  width: 100%;
+}
+
+.TabAndHaikusSection p {
+  font-size: 0.1em;
+}
+.textHaiku {
+  font-size: 200px;
+  margin-left: 0%;
+}
+.haikuDisplay{
+  margin-bottom: 100px;
+}
+.AllTabSection {
+  width: 100%;
+}
+}
+
 
 //////////////////////////////////////////// FIN DESKTOP CSS ////////////////////////////////////////////////////////////////////
 
