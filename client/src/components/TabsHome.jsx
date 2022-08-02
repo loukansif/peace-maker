@@ -417,32 +417,6 @@ export default function TabsHome() {
             <p className="loadMoreHaikusIcone"> load more </p>
           </div>
         </TabPanel>
-<<<<<<< HEAD
-        </div>
-        <div className="TabAndHaikusSection3">
-        <TabPanel value="3" style={{ top: 60, left: 0, marginLeft: 10, color: "white" }}>
-          {localStorage.getItem("userIsLogged")
-            ? (
-              userFollowing.length > 0 ? (
-                <>
-                  {currentHaiku && (
-                    <div className="emojisSelect">
-                      {reactionsImg.map((i, index) => {
-                        return (
-                          <span className="emojiContainer" key={index}>
-                            <img
-                              src={reactionsImg[index]}
-                              className="emojisSelectItem"
-                              alt=""
-                              onClick={() => updateVote(index)}
-                            />
-                            <span>{currentHaiku.reactionss[index]}</span>
-                          </span>
-                        );
-                      })}
-                    </div>
-                  )}
-=======
         <TabPanel
           value="3"
           style={{ top: 60, left: 0, marginLeft: 10, color: "white" }}
@@ -467,7 +441,6 @@ export default function TabsHome() {
                     })}
                   </div>
                 )}
->>>>>>> slim/favoris
 
                 <div className="haikus">
                   {haikus.map((haiku) => {
