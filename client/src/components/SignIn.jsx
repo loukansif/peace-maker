@@ -38,10 +38,6 @@ export default function Connexion() {
     const data = new FormData(event.currentTarget);
     let email = data.get("email");
     let pass = data.get("password");
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
 
     fetch(`http://localhost:5000/users/${email}`)
       .then((resp) => resp.json())

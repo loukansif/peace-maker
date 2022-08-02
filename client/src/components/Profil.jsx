@@ -31,12 +31,13 @@ export default function Profil() {
                 <ArrowBackIosNewIcon onClick={() => navigate(-1)} />
               </Typography>
               <a href="/parametres">
-                <img src={imgSettings} className="settingsLogo" />
+                <img src={imgSettings} className="settingsLogo" alt="" />
               </a>
               <div className="navUserTotem">
                 <a href="/profil">
                   <img
                     src={`${localStorage.getItem("userTotem")}`}
+                    alt=""
                     className="navUserImg"
                   />
                 </a>
